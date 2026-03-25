@@ -1038,56 +1038,91 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
           const WORKSPACE_ID  = '9003199343';
           const CU_HEADERS    = { 'Authorization': CU_TOKEN, 'Content-Type': 'application/json' };
 
-          // ── Collect all form fields ──
-          const firstName   = formData.get('First_Name')    || '';
-          const lastName    = formData.get('Last_Name')     || '';
-          const email       = formData.get('Email')         || '';
-          const mobile      = formData.get('Mobile')        || '';
-          const dob         = formData.get('Date_of_Birth') || '';
-          const location    = formData.get('Location')      || '';
-          const relStatus   = formData.get('Relationship_Status') || '';
-          const partner     = formData.get('Partner_Name')  || '';
-          const yearsTog    = formData.get('Years_Together') || '';
-          const children    = formData.get('Children')      || '';
-          const bizName     = formData.get('Business_Name') || '';
-          const role        = formData.get('Role')           || '';
-          const industry    = formData.get('Industry')       || '';
-          const yearsInBiz  = formData.get('Years_In_Business') || '';
-          const revenue     = formData.get('Annual_Revenue') || '';
-          const teamSize    = formData.get('Team_Size')      || '';
-          const bizDesc     = formData.get('Business_Description') || '';
-          const weight      = formData.get('Weight_kg')     || '';
-          const height      = formData.get('Height_cm')     || '';
-          const sleep       = formData.get('Sleep')          || '';
-          const exercise    = formData.get('Exercise')       || '';
-          const diet        = formData.get('Diet')           || '';
-          const alcohol     = formData.get('Alcohol')        || '';
-          const wolHealth   = formData.get('WOL_Health')    || '';
-          const wolRomantic = formData.get('WOL_Romantic')  || '';
-          const wolFamily   = formData.get('WOL_Family')    || '';
-          const wolFriends  = formData.get('WOL_Friends')   || '';
-          const wolCareer   = formData.get('WOL_Career')    || '';
-          const wolFinances = formData.get('WOL_Finances')  || '';
-          const wolRec      = formData.get('WOL_Recreation')|| '';
-          const wolGrowth   = formData.get('WOL_Growth')    || '';
-          const whyNow      = formData.get('Why_Now')        || '';
-          const top3Goals   = formData.get('Top_3_Goals')   || '';
-          const bigChallenge= formData.get('Biggest_Challenge') || '';
-          const alreadyTried= formData.get('Already_Tried') || '';
-          const vision12    = formData.get('Vision_12_Months') || '';
-          const recentWin   = formData.get('Recent_Win')    || '';
-          const successDef  = formData.get('Success_Definition') || '';
-          const anythingElse= formData.get('Anything_Else') || '';
-          const domNT       = formData.get('Dominant_Neurotransmitter') || '';
-          const attachment  = formData.get('Attachment_Style') || '';
-          const dopNature   = formData.get('Dopamine_Nature_Score')          || '0';
-          const achNature   = formData.get('Acetylcholine_Nature_Score')     || '0';
-          const gabaNature  = formData.get('GABA_Nature_Score')              || '0';
-          const serNature   = formData.get('Serotonin_Nature_Score')         || '0';
-          const dopDef      = formData.get('Dopamine_Deficiency_Score')      || '0';
-          const achDef      = formData.get('Acetylcholine_Deficiency_Score') || '0';
-          const gabaDef     = formData.get('GABA_Deficiency_Score')          || '0';
-          const serDef      = formData.get('Serotonin_Deficiency_Score')     || '0';
+          // ── Collect all form fields directly from DOM ──
+          const gv = name => { const el = document.querySelector(`[name="${name}"]`); return el ? el.value.trim() : ''; };
+          const firstName   = gv('First_Name');
+          const lastName    = gv('Last_Name');
+          const email       = gv('Email');
+          const mobile      = gv('Mobile');
+          const dob         = gv('Date_of_Birth');
+          const location    = gv('Location');
+          const relStatus   = gv('Relationship_Status');
+          const partner     = gv('Partner_Name');
+          const yearsTog    = gv('Years_Together');
+          const children    = gv('Children');
+          const bizName     = gv('Business_Name');
+          const role        = gv('Role');
+          const industry    = gv('Industry');
+          const yearsInBiz  = gv('Years_In_Business');
+          const revenue     = gv('Annual_Revenue');
+          const teamSize    = gv('Team_Size');
+          const bizDesc     = gv('Business_Description');
+          const weight      = gv('Weight_kg');
+          const height      = gv('Height_cm');
+          const healthRating= gv('Health_Rating');
+          const healthConds = gv('Health_Conditions');
+          const sleep       = gv('Sleep');
+          const exercise    = gv('Exercise');
+          const diet        = gv('Diet');
+          const alcohol     = gv('Alcohol');
+          const wolHealth   = gv('WOL_Health');
+          const wolRomantic = gv('WOL_Romantic');
+          const wolFamily   = gv('WOL_Family');
+          const wolFriends  = gv('WOL_Friends');
+          const wolCareer   = gv('WOL_Career');
+          const wolFinances = gv('WOL_Finances');
+          const wolRec      = gv('WOL_Recreation');
+          const wolGrowth   = gv('WOL_Growth');
+          const whyNow      = gv('Why_Now');
+          const top3Goals   = gv('Top_3_Goals');
+          const bigChallenge= gv('Biggest_Challenge');
+          const alreadyTried= gv('Already_Tried');
+          const vision12    = gv('Vision_12_Months');
+          const recentWin   = gv('Recent_Win');
+          const successDef  = gv('Success_Definition');
+          const anythingElse= gv('Anything_Else');
+          const relNotes    = gv('Relationship_Patterns_Notes');
+          const domNT       = gv('Dominant_Neurotransmitter');
+          const attachment  = gv('Attachment_Style');
+          const dopNature   = gv('Dopamine_Nature_Score')          || '0';
+          const achNature   = gv('Acetylcholine_Nature_Score')     || '0';
+          const gabaNature  = gv('GABA_Nature_Score')              || '0';
+          const serNature   = gv('Serotonin_Nature_Score')         || '0';
+          const dopDef      = gv('Dopamine_Deficiency_Score')      || '0';
+          const achDef      = gv('Acetylcholine_Deficiency_Score') || '0';
+          const gabaDef     = gv('GABA_Deficiency_Score')          || '0';
+          const serDef      = gv('Serotonin_Deficiency_Score')     || '0';
+
+          // ── Braverman interpretations ──
+          const ntDescriptions = {
+            'Dopamine': 'Driven, competitive, direct, and action-oriented. Natural leader who thrives on challenge and results. Wired for achievement and pushing limits. Shadow side: impatience, aggression, and burnout from always needing to win.',
+            'Acetylcholine': 'Creative, curious, and highly intuitive. Rapid learner with a rich inner world and a talent for seeing the big picture. Loves ideas and connection. Shadow side: can be scattered, overthinks, and struggles to execute without structure.',
+            'GABA': 'Calm, reliable, and structured. The steady anchor — practical, loyal, and deeply dependable. Thrives in routine and long-term relationships. Shadow side: resistant to change, can suppress emotion, and may avoid necessary confrontation.',
+            'Serotonin': 'Reflective, content, and meaning-driven. Operates from a deep sense of purpose and inner peace. Emotionally grounded. Shadow side: can be passive, withdrawn, and overly sensitive to environment and mood shifts.'
+          };
+          const domNTDesc = ntDescriptions[domNT] || 'Profile not yet determined.';
+
+          const defLabel = score => { const n = parseInt(score); return n <= 5 ? 'Low' : n <= 13 ? 'Moderate' : 'High'; };
+          const defDesc = (nt, score) => {
+            const level = defLabel(score);
+            const descs = {
+              'Dopamine':      { Low: 'No significant deficiency. Energy, drive, and motivation are operating well.', Moderate: 'Some depletion in drive and motivation. May experience occasional fatigue, reduced motivation, or reliance on stimulants.', High: 'Significant dopamine deficiency. Likely experiencing low energy, apathy, difficulty starting tasks, brain fog, or low libido. This is a priority focus area.' },
+              'Acetylcholine': { Low: 'Memory, focus, and creativity are functioning well.', Moderate: 'Some cognitive slowdown. May notice word recall issues, reduced creativity, or difficulty absorbing new information.', High: 'Significant acetylcholine deficiency. Likely experiencing notable memory issues, mental fog, slow thinking, and difficulty concentrating. Priority focus area.' },
+              'GABA':          { Low: 'Nervous system is well-regulated. Calm under pressure.', Moderate: 'Some stress and anxiety present. May struggle to fully relax or experience mild tension, sleep disturbance, or irritability.', High: 'Significant GABA deficiency. Likely experiencing chronic anxiety, racing thoughts, difficulty sleeping, physical tension, and overwhelm. Priority focus area.' },
+              'Serotonin':     { Low: 'Mood, sleep, and contentment are tracking well.', Moderate: 'Some mood variability. May experience periods of flatness, mild pessimism, or sensitivity to criticism.', High: 'Significant serotonin deficiency. Likely experiencing persistent low mood, poor sleep quality, low self-esteem, carb cravings, and social withdrawal. Priority focus area.' }
+            };
+            return (descs[nt] && descs[nt][level]) || '';
+          };
+
+          // ── Attachment style explanations ──
+          const attachmentDescs = {
+            'Anxious / Preoccupied — craves closeness, fears abandonment': 'Anxious attachment style. Tends to crave closeness and reassurance, while fearing abandonment or rejection. Highly sensitive to a partner\'s moods and actions. Often over-analyses relationship signals and can become preoccupied with whether they are loved. In coaching: this pattern often shows up as people-pleasing, emotional reactivity, difficulty setting boundaries, and a tendency to seek external validation. The work is building secure internal self-worth that does not depend on others\' responses.',
+            'Avoidant / Dismissive — values independence, uncomfortable with closeness': 'Avoidant attachment style. Values independence and self-sufficiency above intimacy. Tends to minimise emotional needs — both their own and others\'. Can feel suffocated by closeness and withdraw when partners seek connection. In coaching: often presents as emotional unavailability, difficulty asking for help, dismissiveness of vulnerability, and over-investment in work or achievement as a substitute for intimacy. The work is learning that dependence and closeness are safe.',
+            'Secure — comfortable with both intimacy and independence': 'Secure attachment style. Comfortable with both intimacy and independence. Can give and receive love without significant anxiety or avoidance. Handles conflict constructively and trusts that relationships can survive difficulty. In coaching: a solid foundation to build on — work can go straight to goals, performance, and growth without needing to first untangle deep relational patterns.',
+            'Fearful-Avoidant — high anxiety and avoidance; wants closeness but fears it': 'Fearful-avoidant (disorganised) attachment style. Simultaneously craves and fears closeness — wanting deep connection but expecting it to bring pain. Often experienced early relational trauma. Relationships can feel chaotic or push-pull. In coaching: requires patience and consistency. The work involves building safety and trust in the coaching relationship itself, as well as untangling the internal conflict between wanting connection and protecting against perceived threat.'
+          };
+          const attachStyleKey = Object.keys(attachmentDescs).find(k => attachment.startsWith(k.split(' —')[0])) || attachment;
+          const attachDesc = attachmentDescs[attachStyleKey] || `Attachment style recorded as: ${attachment}`;
 
           // ── 1. Create client folder in Delivery space ──
           const folderRes = await fetch(
@@ -1157,10 +1192,12 @@ ${bizDesc}
 |-------|-------|
 | **Weight** | ${weight} kg |
 | **Height** | ${height} cm |
+| **Overall Health Rating** | ${healthRating} / 10 |
 | **Sleep** | ${sleep} |
 | **Exercise** | ${exercise} |
 | **Diet** | ${diet} |
-| **Alcohol** | ${alcohol} |
+| **Alcohol / Substances** | ${alcohol} |
+| **Health Conditions / Medications** | ${healthConds || 'None noted'} |
 
 ---
 
@@ -1173,26 +1210,58 @@ ${bizDesc}
 | Friends & Social | ${wolFriends} |
 | Career & Business | ${wolCareer} |
 | Finances | ${wolFinances} |
-| Recreation & Fun | ${wolRec} |
-| Personal Growth | ${wolGrowth} |
+| Recreation & Adventure | ${wolRec} |
+| Personal Growth & Spirituality | ${wolGrowth} |
 
 ---
 
 ## 🧠 Braverman Assessment Results
 
-### Nature Scores (Baseline Personality)
-| Neurotransmitter | Nature Score | Deficiency Score |
-|------------------|:------------:|:----------------:|
-| **Dopamine** | ${dopNature} | ${dopDef} |
-| **Acetylcholine** | ${achNature} | ${achDef} |
-| **GABA** | ${gabaNature} | ${gabaDef} |
-| **Serotonin** | ${serNature} | ${serDef} |
+### Nature Scores (Who You Are at Your Best)
+| Neurotransmitter | Score /30 |
+|------------------|:---------:|
+| Dopamine | ${dopNature} |
+| Acetylcholine | ${achNature} |
+| GABA | ${gabaNature} |
+| Serotonin | ${serNature} |
 
-### 🏆 Dominant Neurotransmitter: **${domNT}**
+### 🏆 Dominant Neurotransmitter: ${domNT}
+
+${domNTDesc}
 
 ---
 
-## 💛 Attachment Style: **${attachment}**
+### Deficiency Scores (Where You May Be Running Low)
+| Neurotransmitter | Score | Level |
+|------------------|:-----:|:-----:|
+| Dopamine | ${dopDef} | ${defLabel(dopDef)} |
+| Acetylcholine | ${achDef} | ${defLabel(achDef)} |
+| GABA | ${gabaDef} | ${defLabel(gabaDef)} |
+| Serotonin | ${serDef} | ${defLabel(serDef)} |
+
+*0–5 = Low deficiency | 6–13 = Moderate | 14+ = High*
+
+**Dopamine Deficiency — ${defLabel(dopDef)}**
+${defDesc('Dopamine', dopDef)}
+
+**Acetylcholine Deficiency — ${defLabel(achDef)}**
+${defDesc('Acetylcholine', achDef)}
+
+**GABA Deficiency — ${defLabel(gabaDef)}**
+${defDesc('GABA', gabaDef)}
+
+**Serotonin Deficiency — ${defLabel(serDef)}**
+${defDesc('Serotonin', serDef)}
+
+---
+
+## 💛 Attachment Style
+
+**Style: ${attachment}**
+
+${attachDesc}
+
+${relNotes ? '**Client notes on relationship patterns:**\n' + relNotes : ''}
 
 ---
 
@@ -1219,7 +1288,7 @@ ${recentWin}
 **How Will You Know It Was Worth It?**
 ${successDef}
 
-**Anything Else**
+**Anything Else Your Coach Should Know**
 ${anythingElse}
 
 ---
