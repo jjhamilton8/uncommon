@@ -1261,15 +1261,16 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
   const formData = new FormData(form);
   const SUBMIT_URL = 'https://formsubmit.co/josh@uncmp.com';
 
+  // Show success immediately — don't make the user wait on email delivery
+  form.style.display = 'none';
+  document.getElementById('success-msg').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Send email notification in background (fire and forget)
+  fetch(SUBMIT_URL, { method: 'POST', body: formData }).catch(() => {});
+
+  // ── ClickUp: Create Client Folder + Doc ────────────────────────
   try {
-    const response = await fetch(SUBMIT_URL, { method: 'POST', body: formData });
-
-    if (response.ok || response.redirected) {
-      form.style.display = 'none';
-      document.getElementById('success-msg').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-
-      // ── ClickUp: Create Client Folder + Doc ────────────────────────
       (async function() {
         try {
           const SPACE_ID     = '90030484038';
@@ -1690,18 +1691,13 @@ ${anythingElse}
           }
 
         } catch(e) {
-          // Silently fail — email via formsubmit.co already captured the data
+          // Silently fail — email notification already sent via formsubmit.co
         }
       })();
       // ──────────────────────────────────────────────────────────────
 
-    } else {
-      alert('Something went wrong. Please try again or contact your coach directly.');
-    }
   } catch (err) {
-    const name = formData.get('First_Name') + ' ' + formData.get('Last_Name');
-    const mailto = `mailto:josh@uncmp.com?subject=UCMP Onboarding — ${name}&body=Form submission from ${name} (${formData.get('Email')})`;
-    window.location.href = mailto;
+    // Silently fail — success already shown, ClickUp runs independently
   }
 });
 </script>
