@@ -1138,22 +1138,23 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
             { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({ name: '✅ Actions & Tasks' }) }
           );
 
-          // ── 3. Create "📋 Onboarding Profile" doc inside the client folder ──
-          const docRes = await fetch(
-            `https://api.clickup.com/api/v3/workspaces/${WORKSPACE_ID}/docs`,
-            { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({
-                name: `📋 ${firstName} ${lastName} — Onboarding Profile`,
-                parent: { id: folderId, type: 5 },
-                visibility: 'PUBLIC',
-                create_page: false
-              })
-            }
-          );
+          // ── 3. Create "📋 Onboarding Profile" doc via Cloudflare Worker proxy ──
+          // (ClickUp v3 docs AND pages APIs are both CORS-blocked from browser; Worker proxies server-side)
+          const WORKER_URL = 'https://ucmp-clickup-proxy.josh-501.workers.dev';
+          const docRes = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              action: 'createDoc',
+              workspaceId: WORKSPACE_ID,
+              folderId: folderId,
+              name: `📋 ${firstName} ${lastName} — Onboarding Profile`
+            })
+          });
           const docData = await docRes.json();
           const docId = docData.id;
 
           // ── 4. Build full onboarding content and POST page via Cloudflare Worker proxy ──
-          // (ClickUp v3 pages API is CORS-blocked from browser; Worker proxies server-side)
           const pageContent =
 `# ${firstName} ${lastName} — Onboarding Profile
 
@@ -1294,12 +1295,13 @@ ${anythingElse}
 ---
 *Submitted via UCMP Onboarding Form*`;
 
-          // Post page content to the doc via Cloudflare Worker (bypasses CORS on ClickUp v3 pages API)
+          // Post page content to the doc via Cloudflare Worker
           if (docId) {
-            await fetch('https://ucmp-clickup-proxy.josh-501.workers.dev', {
+            await fetch(WORKER_URL, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
+                action: 'createPage',
                 workspaceId: WORKSPACE_ID,
                 docId: docId,
                 name: `${firstName} ${lastName} — Onboarding Profile`,
