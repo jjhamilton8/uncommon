@@ -1138,23 +1138,29 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
             { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({ name: '✅ Actions & Tasks' }) }
           );
 
-          // ── 3. Create client doc inside the folder ──
-          const docRes = await fetch(
+          // ── 3. Create client doc inside the folder (for coaching session notes) ──
+          fetch(
             `https://api.clickup.com/api/v3/workspaces/${WORKSPACE_ID}/docs`,
             { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({
-                name: `${firstName} ${lastName} — Onboarding Profile`,
+                name: `${firstName} ${lastName} — Coaching Notes`,
                 parent: { id: folderId, type: 5 },
                 visibility: 'PUBLIC',
                 create_page: false
               })
             }
           );
-          const docData = await docRes.json();
-          const docId = docData.id;
-          if (!docId) throw new Error('Doc creation failed');
 
-          // ── 4. Create the onboarding profile page with all form data ──
-          const pageContent =
+          // ── 4. Create "📋 Onboarding Profile" task in Actions & Tasks list ──
+          // (ClickUp v3 pages API is CORS-restricted from browser; v2 task description supports full markdown)
+          const listRes = await fetch(
+            `https://api.clickup.com/api/v2/folder/${folderId}/list`,
+            { method: 'GET', headers: CU_HEADERS }
+          );
+          const listData = await listRes.json();
+          const listId = (listData.lists && listData.lists[0]) ? listData.lists[0].id : null;
+          if (!listId) throw new Error('List not found');
+
+          const taskDescription =
 `# ${firstName} ${lastName} — Onboarding Profile
 
 ## 👤 Personal Details
@@ -1295,11 +1301,11 @@ ${anythingElse}
 *Submitted via UCMP Onboarding Form*`;
 
           await fetch(
-            `https://api.clickup.com/api/v3/workspaces/${WORKSPACE_ID}/docs/${docId}/pages`,
+            `https://api.clickup.com/api/v2/list/${listId}/task`,
             { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({
-                name: 'Onboarding Profile',
-                content: pageContent,
-                content_format: 'text/md'
+                name: '📋 Onboarding Profile',
+                description: taskDescription,
+                status: 'to do'
               })
             }
           );
