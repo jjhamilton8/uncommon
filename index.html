@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCMP Onboarding</title>
+</head>
+<body>
+<style>    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --surface2: #1e1e1e;
+      --border: #2a2a2a;
+      --accent: #c8a96e;
+      --accent2: #a08050;
+      --text: #e8e8e8;
+      --text-muted: #888;
+      --error: #e05555;
+      --success: #55b55e;
+      --radius: 8px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .hero {
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1208 100%);
+      border-bottom: 1px solid var(--accent2);
+      padding: 60px 24px 48px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+    }
+    .form-container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+    .section-header {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-header .num {
+      background: var(--accent);
+      color: #0d0d0d;
+      font-weight: bold;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+    .section-header h2 {
+      font-size: 1.05rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .section-body { padding: 24px; }
+    .field {
+      margin-bottom: 22px;
+    }
+    .field:last-child { margin-bottom: 0; }
+    label {
+      display: block;
+      color: var(--text);
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    label .req { color: var(--accent); margin-left: 3px; }
+    label .hint {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      margin-top: 2px;
+      font-family: Arial, sans-serif;
+    }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="number"],
+    input[type="date"], select, textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      font-family: Arial, sans-serif;
+      transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent2);
+    }
+    select option { background: #1e1e1e; }
+    textarea { resize: vertical; min-height: 80px; }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .radio-group, .braverman-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .radio-option:hover { border-color: var(--accent2); background: #141414; }
+    .radio-option input { accent-color: var(--accent); cursor: pointer; }
+    .radio-option span { font-family: Arial, sans-serif; font-size: 0.9rem; }
+
+    /* Braverman Question Styles */
+    .braverman-instructions {
+      background: #1a1a0f;
+      border: 1px solid var(--accent2);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+  2 .braverman-instructions strong { color: var(--accent); }
+    .braverman-section-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin: 24px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      font-family: Arial, sans-serif;
+    }
+    .bq {
+   2  display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .bq:last-child { border-bottom: none; }
+    .bq-text {
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .bq-score {
+      display: flex;
+      gap: 6px;
+    }
+    .bq-score label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+    .bq-score input[type="radio"] {
+      accent-color: var(--accent);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+    }
+    .score-display {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-top: 24px;
+    }
+    .score-display h3 {
+      color: var(--accent);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .score-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 14px;
+    }
+    .score-item .label { font-family: Arial, sans-serif; font-size: 0.8rem; color: var(--text-muted); }
+    .score-item .value { font-size: 1.4rem; color: var(--accent); font-weight: bold; margin-top: 2px; }
+    .score-item .interp { font-family: Arial, sans-serif; font-size: 0.75rem; color: var(--text-muted); }
+    .dominant-box {
+      grid-column: 1 / -1;
+      background: #1a1a0f;
+      border: 1px solid var(--accent2);
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+    }
+    .dominant-box .label { color: var(--text-muted); font-size: 0.8rem; }
+    .dominant-box .value { color: var(--accent); font-size: 1.1rem; margin-top: 4px; }
+
+    /* Attachment Style */
+    .attachment-q {
+      margin-bottom: 20px;
+    }
+    .attachment-q .q-text {
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    /* Submit */
+    .submit-section {
+      text-align: center;
+      padding: 40px 24px;
+    }
+    .submit-section p {
+      color: var(--text-muted);
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+    }
+    button[type="submit"] {
+      background: var(--accent);
+      color: #0d0d0d;
+      border: none;
+      border-radius: var(--radius);
+      padding: 18px 48px;
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    button[type="submit"]:hover { background: var(--accent2); }
+    button[type="submit"]:active { transform: scale(0.98); }
+
+    .success-message {
+      display: none;
+      background: #0d1f0d;
+      border: 1px solid var(--success);
+      border-radius: var(--radius);
+      padding: 32px;
+      text-align: center;
+      margin-top: 32px;
+    }
+    .success-message h2 { color: var(--success); margin-bottom: 12px; }
+    .success-message p { color: var(--text-muted); font-family: Arial, sans-serif; }
+
+    @media (max-width: 600px) {
+      .row-2 { grid-template-columns: 1fr; }
+      .score-grid { grid-template-columns: 1fr; }
+      .bq { grid-template-columns: 1fr; }
+      .bq-score { justify-content: flex-start; }
+      .hero h1 { font-size: 1.5rem; }
+    }
+  </style>
+</style>
+<div class="hero">
+  <h1>Uncommon Man Project</h1>
+  <p>Welcome. This form helps your coach understand where you're at so we can make the most of our time together. Take your time ‚Äî be honest, it's just for us.</p>
+</div>
+
+<div class="form-container">
+<form id="onboarding-form">
+
+<!-- Hidden fields for calculated scores -->
+<input type="hidden" name="_subject" value="UCMP Onboarding Form Submission" />
+<input type="hidden" name="_template" value="table" />
+<input type="hidden" id="h_dom_nature" name="Dopamine_Nature_Score" value="0" />
+<input type="hidden" id="h_ach_nature" name="Acetylcholine_Nature_Score" value="0" />
+<input type="hidden" id="h_gaba_nature" name="GABA_Nature_Score" value="0" />
+<input type="hidden" id="h_sero_nature" name="Serotonin_Nature_Score" value="0" />
+<input type="hidden" id="h_dom_def" name="Dopamine_Deficiency_Score" value="0" />
+<input type="hidden" id="h_ach_def" name="Acetylcholine_Deficiency_Score" value="0" />
+<input type="hidden" id="h_gaba_def" name="GABA_Deficiency_Score" value="0" />
+<input type="hidden" id="h_sero_def" name="Serotonin_Deficiency_Score" value="0" />
+<input type="hidden" id="h_dominant" name="Dominant_Neurotransmitter" value="" />
+<input type="hidden" id="h_attachment" name="Attachment_Style" value="" />
+
+<!-- ===== SECTION 1: PERSONAL ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">1</div><h2>Personal Details</h2></div>
+  <div class="section-body">
+    <div class="row-2">
+      <div class="field">
+        <label>First Name <span class="req">*</span></label>
+        <input type="4ext" name="First_Name" required placeholder="e.g. Chris" />
+      </div>
+      <div class="field">
+        <label>Last Name <span class="req">*</span></label>
+        <input type="text" name="Last_Name" required placeholder="e.g. Warrick" />
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label>Email Address <span class="req">*</span></label>
+        <input type="email" name="Email" required placeholder="you@email.com" />
+      </div>
+      <div class="field">
+        <label>Mobile Number</label>
+        <input type="tel" name="Mobile" placeholder="+61 400 000 000" />
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label>Date of Birth</label>
+        <input type="date" name="Date_of_Birth" />
+      </div>
+      <div class="field">
+        <label>Location (City, Country)</label>
+        <input type="text" name="Location" placeholder="e.g. Brisbane, Australia" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Relationship Status</label>
+      <select name="Relationship_Status">
+        <option value="">‚Äî Select ‚Äî</option>
+        <option>Single</option>
+        <option>In a relationship</option>
+        <option>Married</option>
+        <option>Separated / Divorcing</option>
+        <option>Divorced</option>
+        <option>Complicated</option>
+      </select>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label>Partner's Name <span class="hint">If applicable</span></label>
+        <input type="text" name="Partner_Name" placeholder="e.g. Brooke" />
+      </div>
+      <div class="field">
+        <label>Years Together <span class="hint">If applicable</span></label>
+        <input type="number" name="Years_Together" min="0" placeholder="e.g. 7" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Children <span class="hint">Names and ages ‚Äî or "none"</span></label>
+      <input type="text" name="Children" placeholder="e.g. Jack (9), Ella (6) ‚Äî or None" />
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 2: BUSINESS ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">2</div><h2>Business & Career</h2></div>
+  <div class="section-body">
+    <div class="row-2">
+      <div class="field">
+        <label>Business / Company Name</label>
+        <input type="text" name="Business_Name" placeholder="e.g. Primary Business Group" />
+      </div>
+      <div class="field">
+        <label>Your Role / Title</label>
+        <input type="text" name="Role" placeholder="e.g. Owner, Director, CEO" />
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label>Industry / Niche</label>
+        <input type="text" name="Industry" placeholder="e.g. Construction, Finance, Trade" />
+      </d)v>
+      <div class="field">
+        <label>Years in Business</label>
+        <input type="number" name="Years_In_Business" min="0" placeholder="e.g. 8" />
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label>Approximate Annual Revenue</label>
+        <select name="Annual_Revenue">
+          <option value="">‚Äî Select range ‚Äî</option>
+          <option>Under $100k</option>
+          <option>$100k ‚Äì $300k</option>
+          <option>$300k ‚Äì $500k</option>
+          <option>$500k ‚Äì $1M</option>
+          <option>$1M ‚Äì $3M</option>
+          <option>$3M ‚Äì $10M</option>
+          <option>$10M+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Team Size</label>
+        <select name="Team_Size">
+          <option value="">‚Äî Select ‚Äî</option>
+          <option>Just me</option>
+          <option>2 ‚Äì 5</option>
+          <option>6 ‚Äì 15</option>
+          <option>16 ‚Äì 50</option>
+          <option>50+</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Describe your business in 2‚Äì3 sentences</label>
+      <textarea name="Business_Description" placeholder="What do you do, who do you serve, how do you make money?"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 3: HEALTH ===== -->
+<div class="section">
+  <div class="section-header"><div cl!ss="num">3</div><h2>Health & Lifestyle</h2></div>
+  <div class="section-body">
+    <div class="row-2">
+      <div class="field">
+        <label>Current Weight (kg)</label>
+        <input type="number" name="Weight_kg" min="40" max="250" placeholder="e.g. 88" />
+      </div>
+      <div class="field">
+        <label>Height (cm)</label>
+        <input type="number" name="Height_cm" min="140" max="220" placeholder="e.g. 183" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Rate your overall health right now (1 = terrible, 10 = optimal)</label>
+      <select name="Health_Rating">
+        <option value="">‚Äî Select ‚Äî</option>
+        <option>1 ‚Äî Struggling</option>
+        <option>2</option><option>3</option><option>4</option><option>5 ‚Äî Average</option>
+        <option>6</option><option>7</option><option>8</option><option>9</option>
+        <option>10 ‚Äî Optimal</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>How is your sleep? <span class="hint">Hours per night, quality, any issues</span></label>
+      <textarea name="Sleep" rows="2" placeholder="e.g. 6‚Äì7 hours, light sleeper, trouble switching off"></textarea>
+    </div>
+    <div class="field">
+      <label>Current exercise / training</label>
+      <textarea name="Exercise" rows="2" placeholder="e.g. Gym 3x/week, occasional run, nothing right now"></textarea>
+    </div>
+    <div class="field">
+      <label>Diet / eating habits</label>
+      <textarea name="Diet" rows="2" placeholder="e.g. No restrictions, eat clean most of the time, drink too much coffee"></textarea>
+    </div>
+    <div class="field">
+      <label>Alcohol / substances</label>
+      <textarea name="Alcohol" rows="2" placeholder="e.g. 3‚Äì4 drinks on weekends, socially, none"></textarea>
+    </div>
+    <div class="field">
+      <label>Any current health conditions or medications?</label>
+      <textarea name="Health_Conditions" rows="2" placeholder="e.g. None / Type 2 diabetes managed with X"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 4: WHEEL OF LIFE ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">4</div><h2>Wheel of Life ‚Äî Rate Each Area (1‚Äì10)</h2></div>
+  <div class="section-body">
+    <p style="font-family:Arial,sans-serif;font-size:0.85rem;color:var(--text-muted);margin-bottom:20px;">1 = rock bottom, 10 = exactly where you want it</p>
+    <div class="row-2">
+      <div class="field">
+        <label>Health</label>
+        <select name="WOL_Health"><option value="">‚Äî</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+      </div>
+      <div class="field">
+        <label>Romantic / Relationship</label>
+        <select name="WOL_Romantic"><option value="">‚Äî</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+      </div>
+      <div class="field">
+        <label>Family</label>
+        <select name="WOL_Family"><option value="">‚Äî</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+      </div>
+      <div class="field">
+        <label>Friends / Social</label>
+        <select name="WOL_Friends"><option value="">‚Äî</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+      </div>
+      <div class="field">
+        <label>Career / Business</label>
+        <select name="WOL_Career"><option value="">‚Äî</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+      </div>
+      <div class="field">
+        <label>Finances</label>
+        <select name="WOL_Finances"><option value="">‚Äî</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+      </div>
+      <div class="field">
+        <label>Recreation / Adventure</label>
+        <select name="WOL_Recreation"><option value="">‚Äî</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+      </div>
+      <div class="field">
+        <label>Personal Growth / Spirituality</label>
+        <select name="WOL_Growth"><option value="">‚Äî</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 5: GOALS & MINDSET ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">5</div><h2>Goals & Mindset</h2></div>
+  <div class="section-body">
+    <div class="field">
+      <label>Why did you decide to invest in yourself right now? <span class="req">*</span></label>
+      <textarea name="Why_Now" required placeholder="What was the moment or realisation that made you say yes to this?"></textarea>
+    </div>
+    <div class="field">
+      <label>What are your top 3 goals for this program? <span class="req">*</span></label>
+      <textarea name="Top_3_Goals" required placeholder="1. ...\n2. ...\n3. ..."></textarea>
+    </div>
+    <div class="field">
+      <label>What's the biggest challenge you're facing right now?</label>
+      <textarea name="Biggest_Challenge" placeholder="Be specific ‚Äî what's the thing that keeps you stuck or wakes you up at night?"></textarea>
+    </div>
+    <div class="field">
+      <label>What have you already tried to fix it?</label>
+      <textarea name="Already_Tried" placeholder="Books, therapy, courses, coaches, nothing..."></textarea>
+    </div>
+    <div class="field">
+      <label>Where do you want to be in 12 months?</label>
+      <textarea name="Vision_12_Months" placeholder="Paint the picture ‚Äî business, relationship, health, how you feel day to day."></textarea>
+    </div>
+    <div class="field">
+      <label>What's your biggest recent WIN?</label>
+      <textarea name="Recent_Win" rows="2" placeholder="Something you're proud of in the last 6‚Äì12 months"></textarea>
+    </div>
+    <div class="field">
+      <label>What does success look like at the end of this program?</label>
+      <textarea name="Success_Definition" placeholder="How will you know it was worth it?"></textarea>
+    </div>
+    <div class="field">
+      <label>Is there anything else your coach should know before your first session?</label>
+      <textarea name="Anything_Else" placeholder="Anything at all ‚Äî context, history, something you want to flag"></textarea>
+    </div>
+  </div>
+</div><style>
+.att-table{border-collapse:collapse;width:100%;font-family:Arial,sans-serif;font-size:0.85rem;margin-bottom:24px}
+.att-table thead th{background:#f0f0f0;padding:6px 8px;text-align:center;font-weight:600;font-size:0.8rem;border:1px solid #ddd}
+.att-table thead th.att-stmt-th{text-align:left;width:72%}
+.att-table tbody tr:nth-child(even){background:#fafafa}
+.att-table tbody td{padding:7px 8px;border:1px solid #ddd;vertical-align:middle;font-family:Arial,sans-serif;font-size:0.84rem}
+.att-table tbody td.att-check{text-align:center;width:9.3%}
+.att-table input[type="checkbox"]{width:18px;height:18px;cursor:pointer;accent-color:#0066cc}
+.att-scores{display:flex;gap:20px;flex-wrap:wrap;background:#f0f7ff;border:1px solid #c0d8f0;border-radius:8px;padding:12px 16px;margin-bottom:16px;align-items:center}
+.att-sc{font-family:Arial,sans-serif;font-size:0.85rem;text-align:center}
+.att-sc .sc-num{font-size:1.6rem;font-weight:700;color:#0055aa;line-height:1}
+.att-sc .sc-lbl{font-size:0.75rem;color:#555;margin-top:2px}
+.att-dominant{font-family:Arial,sans-serif;font-size:0.9rem;font-weight:600;margin-bottom:20px;padding:8px 12px;background:#e8f0fe;border-radius:6px;display:inline-block}
+</style>
+
+<!-- ===== SECTION 6: ATTACHMENT STYLE ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">6</div><h2>Attachment Style</h2></div>
+  <div class="section-body">
+    <p style="font-family:Arial,sans-serif;font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Check the box next to each statement that is <strong>TRUE</strong> for you. If the answer is untrue, <em>don‚Äôt</em> mark it at all.</p>
+    <p style="font-family:Arial,sans-serif;font-size:0.78rem;color:var(--text-muted);margin-bottom:20px;font-style:italic;">Adapted from Fraley, Waller &amp; Brennan‚Äôs ECR-R Questionnaire, as used in <em>Attached</em> by Dr Amir Levine &amp; Rachel Heller.</p>
+
+    <table class="att-table">
+      <thead>
+        <tr><th class="att-stmt-th" rowspan="2"></th><th colspan="3">TRUE</th></tr>
+        <tr><th>A</th><th>B</th><th>C</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>I often worry that my partner will stop loving me.</td><td class="att-check"><input type="checkbox" name="att_A_1" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I find it easy to be affectionate with my partner.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_1" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>I fear that once someone gets to know the real me, s/he won‚Äôt like who I am.</td><td class="att-check"><input type="checkbox" name="att_A_2" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I find that I bounce back quickly after a breakup. It‚Äôs weird how I can just put someone out of my mind.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_1" value="1" /></td></tr>
+        <tr><td>When I‚Äôm not involved in a relationship, I feel somewhat anxious and incomplete.</td><td class="att-check"><input type="checkbox" name="!tt_A_3" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I find it difficult to emotionally support my partner when s/he is feeling down.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_2" value="1" /></td></tr>
+        <tr><td>When my partner is away, I‚Äôm afraid that s/he might become interested in someone else.</td><td class="att-check"><input type="checkbox" name="att_A_4" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I feel comfortable depending on romantic partners.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_2" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>My independence is more important to me than my relationships.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_3" value="1" /></td></tr>
+        <tr><td>I prefer not to share my innermost feelings with my partner.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_4" value="1" /></td></tr>
+        <tr><td>When I show my partner how I feel, I‚Äôm afraid s/he will not feel the same about me.</td><td class="att-check"><input type="checkbox" name="att_A_5" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I am generally satisfied with my romantic relationships.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_3" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>I don‚Äôt feel the need to act out much in my romantic relationships.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_4" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>I think about my relationships a lot.</td><td class="att-check"><input type="checkbox" name="att_A_6" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I find it difficult to depend on romantic partners.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_5" value="1" /></td></tr>
+        <tr><td>I tend to get very quickly attached to a romantic partner.</td><td class="att-check"><input type="checkbox" name="att_A_7" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I have little difficulty expressing my needs and wants to my partner.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_5" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>I sometimes feel angry or annoyed with my partner without knowing why.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_6" value="1" /></td></tr>
+        <tr><td>I am very sensitive to my partner‚Äôs moods.</td><td class="att-check"><input type="checkbox" name="att_A_8" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I believe most people are essentially honest and dependable.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_6" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>I prefer casual sex with uncommitted partners to intimate sex with one person.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_7" value="1" /></td></tr>
+        <tr><td>I‚Äôm comfortable sharing my personal thoughts and feelings with my partner.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_7" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>I worry that if my partner leaves me I might never find someone else.</td><td class="att-check"><input type="checkbox" name="att_A_9" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>It makes me nervous when my partner gets too close.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_8" value="1" /></td></tr>
+        <tr><td>During a conflict, I tend to impulsively do or say things I later regret, rather than be able to reason about things.</td><td class="att-check"><input type="checkbox" name="att_A_10" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>An argument with my partner doesn‚Äôt usually cause me to question our entire relationship.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_8" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>My partners often want me to be more intimate than I feel comfortable being.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_9" value="1" /></td></tr>
+        <tr><td>I worry that I‚Äôm not attractive enough.</td><td class="att-check"><input type="checkbox" name="att_A_11" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>Sometimes people see me as boring because I create little drama in relationships.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_9" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>I miss my partner when we‚Äôre apart, but then when we‚Äôre together I feel the need to escape.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_10" value="1" /></td></tr>
+        <tr><td>When I disagree with someone, I feel comfortable expressing my opinions.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_10" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>I hate feeling that other people depend on me.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_11" value="1" /></td></tr>
+        <tr><td>If I notice that someone I‚Äôm interested in is checking out other people, I don‚Äôt let it faze me. I might feel a pang of jealousy, but it‚Äôs fleeting.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_11" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>If I notice that someone I‚Äôm interested in is checking out other people, I feel relieved ‚Äî it means s/he‚Äôs not looking to make things exclusive.</td><td class="att-check"></td><td cl!ss="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_12" value="1" /></td></tr>
+        <tr><td>If I notice that someone I‚Äôm interested in is checking out other people, it makes me feel depressed.</td><td class="att-check"><input type="checkbox" name="att_A_12" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>If someone I‚Äôve been dating begins to act cold and distant, I may wonder what‚Äôs happened, but I‚Äôll know it‚Äôs probably not about me.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_12" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>If someone I‚Äôve been dating begins to act cold and distant, I‚Äôll probably be indifferent; I might even be relieved.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_13" value="1" /></td></tr>
+        <tr><td>If someone I‚Äôve been dating begins to act cold and distant, I‚Äôll worry that I‚Äôve done something wrong.</td><td class="att-check"><input type="checkbox" name="att_A_13" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>If my partner was to break up with me, I‚Äôd try my best to show her/him what s/he is missing (a little jealousy can‚Äôt hurt).</td><td class="att-check"><input type="checkbox" name="att_A_14" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>If someone I‚Äôve been dating for several months tells me s/he wants to stop seeing me, I‚Äôd feel hurt at first, but I‚Äôd get over it.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_13" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>Sometimes when I get what I want in a relationship, I‚Äôm not sure what I want anymore.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_14" value="1" /></td></tr>
+        <tr><td>I won‚Äôt have much of a problem staying in touch with my ex (strictly platonic) ‚Äî after all, we have a lot in common.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_14" value="1" /></td><td class="att-check"></td></tr>
+      </tbody>
+    </table>
+
+    <div class="att-scores">
+      <div class="att-sc"><div class="sc-num" id="att-a-count">0</div><div class="sc-lbl">A ‚Äî Anxious<br>/¬†14</div></div>
+      <div class="att-sc"><div class="sc-num" id="att-b-count">0</div><div class="sc-lbl">B ‚Äî Secure<br>/¬†14</div></div>
+      <div class="att-sc"><div class="sc-num" id="att-c-count">0</div><div class="sc-lbl">C ‚Äî Avoidant<br>/¬†14</div></div>
+    </div>
+    <div class="att-dominant">Your attachment style: <span id="att-style-label">‚Äî</span></div>
+
+    <input type="hidden" id="h_att_a" name="Attachment_A_Count" value="0" />
+    <input type="hidden" id="h_att_b" name="Attachment_B_Count" value="0" />
+    <input type="hidden" id="h_att_c" name="Attachment_C_Count" value="0" />
+    <input type="hidden" id="h_attachment" name="Attachment_Style" value="" />
+
+    <div class="field" style="margin-top:20px;">
+      <label>Anything else about how you show up in relationships ‚Äî with your partner, kids, or team? <span class="hint">Any patterns you‚Äôve noticed about yourself</span></label>
+      <textarea name="Relationship_Patterns_Notes" rows="3" pl!ceholder="e.g. I tend to people-please at home, I get controlling when I‚Äôm stressed, I struggle to switch off from work mode..."></textarea>
+    </div>
+  </div>
+</div><!-- ===== SECTION 7: BRAVERMAN NATURE ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">7</div><h2>Braverman Assessment ‚Äî Part 1: Nature</h2></div>
+  <div class="section-body">
+    <div class="braverman-instructions">
+      <strong>Instructions:</strong> Score each statement honestly based on how you generally are ‚Äî not how you'd like to be.
+      <br><br>
+      <strong>0 = Never or Rarely &nbsp;|&nbsp; 1 = Sometimes &nbsp;|&nbsp; 2 = Often or Always</strong>
+    </div>
+
+    <div class="braverman-section-label">Dopamine ‚Äî Drive, Energy & Action (Q1‚Äì15)</div>
+    <div id="dom-nature-questions"></div>
+
+    <div class="braverman-section-label">Acetylcholine ‚Äî Creativity, Memory & Learning (Q16‚Äì30)</div>
+    <div id="ach-nature-questions"></div>
+
+    <div class="braverman-section-label">GABA ‚Äî Calm, Stability & Structure (Q31‚Äì45)</div>
+    <div id="gaba-nature-questions"></div>
+
+    <div class="braverman-section-label">Serotonin ‚Äî Mood, Contentment & Sleep (Q46‚Äì60)</div>
+    <div id="sero-nature-questions"></div>
+
+    <div class="score-display">
+      <h3>Your Nature Scores (live)</h3>
+      <div class="score-grid">
+        <div class="score-item"><div class="label">Do0amine</div><div class="value" id="dom-n-score">0</div><div class="interp" id="dom-n-interp">‚Äî</div></div>
+        <div class="score-item"><div class="label">Acetylcholine</div><div class="value" id="ach-n-score">0</div><div class="interp" id="ach-n-interp">‚Äî</div></div>
+        <div class="score-item"><div class="label">GABA</div><div class="value" id="gaba-n-score">0</div><div class="interp" id="gaba-n-interp">‚Äî</div></div>
+        <div class="score-item"><div class="label">Serotonin</div><div class="value" id="sero-n-score">0</div><div class="interp" id="sero-n-interp">‚Äî</div></div>
+        <div class="dominant-box"><div class="label">Dominant Neurotransmitter</div><div class="value" id="dominant-nt">Complete questions above</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 8: BRAVERMAN DEFICIENCY ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">8</div><h2>Braverman Assessment ‚Äî Part 2: Deficiency</h2></div>
+  <div class="section-body">
+    <div class="braverman-instructions">
+      Rate how often you experience each symptom or feeling.
+      <br><br>
+      <strong>0 = Never or Rarely &nbsp;|&nbsp; 1 = Sometimes &nbsp;|&nbsp; 2 = Often or Always</strong>
+    </div>
+
+    <div class="braverman-section-label">Dopamine Deficiency (D1‚Äì10)</div>
+    <div id="dom-def-questions"></div>
+
+    <div class="braverman-section-label">Acetylcholine Deficiency (A1‚Äì10)</div>
+    <div id="ach-def-questions"></div>
+
+    <div class="braverman-section-label">GABA Deficiency (G1‚Äì10)</div>
+    <div id="gaba-def-questions"></div>
+
+    <div class="braverman-section-label">Serotonin Deficiency (S1‚Äì10)</div>
+    <div id="sero-def-questions"></div>
+
+    <div class="score-display">
+      <h3>Your Deficiency Scores (live)</h3>
+      <div class="score-grid">
+        <div class="score-item"><div class="label">Dopamine</div><div class="value" id="dom-d-score">0</div><div class="interp" id="dom-d-interp">‚Äî</div></div>
+        <div class="score-item"><div class="label">Acetylcholine</div><div class="value" id="ach-d-score">0</div><div class="interp" id="ach-d-interp">‚Äî</div></div>
+        <div class="score-item"><div class="label">GABA</div><div class="value" id="gaba-d-score">0</div><div class="interp" id="gaba-d-interp">‚Äî</div></div>
+        <div class="score-item"><div class="label">Serotonin</div><div class="value" id="sero-d-score">0</div><div class="interp" id="sero-d-interp">‚Äî</div></div>
+      </div>
+      <p style="font-family:Arial,sans-serif;font-size:0.78rem;color:var(--text-muted);margin-top:12px;">0‚Äì5 = Low &nbsp;|&nbsp; 6‚Äì13 = Moderate &nbsp;|&nbsp; 14+ = High deficiency</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SUBMIT ===== -->
+<div class="submit-section">
+  <p>Once submitted, your coach will have everything they need before your first session.<br>Your Braverman results and profile will be stored securely in your client file.</p>
+  <button type="submit">Submit My Onboarding</button>
+</div>
+
+<div class="success-message" id="success-msg">
+  <h2>You're in. Welcome.</h2>
+  <p>Your onboarding has been received. Your coach will review everything before your first session together.<br><br>Talk soon.</p>
+</div>
+
+</form>
+</div>
+
+<script>
+// ============================================================
+// BRAVERMAN QUESTIONS DATA
+// ============================================================
+const NATURE_QUESTIONS = {
+  dopamine: [
+    "I consider myself a risk-taker who enjoys adventure and novelty",
+    "I make decisions quickly and confidently",
+    "I have high energy and love being productive",
+    "I tend to be competitive ‚Äî I like to win",
+    "I am direct, assertive, and to the point",
+    "I love a challenge and perform well under pressure",
+    "I set high standards for myself and push hard to meet them",
+    "I like being in charge or leading others",
+    "I have strong opinions and stand by them",
+    "I prefer action and results over theory and analysis",
+    "I get impatient when things move slowly or people don't keep up",
+    "I am highly goal-oriented and motivated by outcomes",
+    "I enjoy physical activity and pushing my body",
+    "I have a high tolerance for discomfort, pain, or stress",
+    "I am generally confident in my abilities"
+  ],
+  acetylcholine: [
+    "I am creative ‚Äî I regularly come up with new ideas",
+    "I pick up new skills and concepts quickly",
+    "I have an excellent memory for details, facts, and conversations",
+    "I love learning ‚Äî reading, courses, deep dives into topics interest me",
+    "I am intuitive and often trust my gut feeling",
+    "I enjoy art, music, culture, or aesthetics",
+    "I can hold multiple thoughts or ideas in my head at once",
+    "I am flexible and adapt well when plans change",
+    "I love reading books and absorbing information",
+    "I naturally see the big picture before the details",
+    "I am curious ‚Äî I ask a lot of questions and love to explore",
+    "I can comfortably juggle multiple projects or ideas simultaneously",
+    "I am expressive and communicate ideas vividly",
+    "I have vivid dreams and a rich inner imagination",
+    "I genuinely enjoy socialising with a diverse range of people"
+  ],
+  gaba: [
+    "I stay calm and steady under pressure",
+    "I thrive with structure, routine, and clear expectations",
+    "I am dependable ‚Äî I follow through on my word",
+    "I am patient ‚Äî I rarely lose my temper",
+    "I am practical and grounded ‚Äî I deal with facts and reality",
+    "I enjoy being part of a team or tight-knit community",
+    "I value loyalty and invest in long-term relationships",
+    "I prefer to finish one task completely before starting another",
+    "I rarely feel anxious or overwhelmed by my circumstances",
+    "I am consistent and reliable in my habits and routines",
+    "I am comfortable with the familiar and what I know well",
+    "I have little need for constant excitement or novelty",
+    "I find peace and comfort in calm, predictable environments",
+    "I have a strong sense of duty and take my responsibilities seriously",
+    "I am emotionally steady ‚Äî not easily thrown by what others do"
+  ],
+  serotonin: [
+    "I am reflective and enjoy time to think and be still",
+    "I sleep well and wake feeling rested most of the time",
+    "I find genuine joy and contentment in everyday life",
+    "I have a clear sense of purpose and what matters to me",
+    "I enjoy routines and rituals that ground my day",
+    "I feel spiritually connected ‚Äî to something larger than myself",
+    "I am generally satisfied with what I have in my life",
+    "I rarely feel irritable, moody, or easily triggered",
+    "I find it easy to forgive, let go, and move forward",
+    "I am drawn to nature, quiet, and peaceful environments",
+    "I feel fundamentally secure in who I am",
+    "I have a positive, optimistic outlook on the future",
+    "I bounce back from setbacks ‚Äî I am emotionally resilient",
+    "I feel happy and at ease more often than not",
+    "I have a healthy relationship with food and appetite"
+  ]
+};
+
+const DEFICIENCY_QUESTIONS = {
+  dopamine: [
+    "I feel physically fatigued or mentally drained without clear cause",
+    "I struggle to get motivated ‚Äî tasks feel heavy or pointless",
+    "I experience brain fog ‚Äî slow thinking, difficulty concentrating",
+    "I crave stimulants (coffee, sugar, thrill-seeking) to feel alive",
+    "I feel apathetic ‚Äî indifferent to things that used to matter",
+    "I get little pleasure from activities I used to enjoy",
+    "I start things but struggle to follow through and finish",
+    "I feel a sense of hopelessness or 'what's the point'",
+    "My libido is low or I have little interest in sex",
+    "I feel sluggish ‚Äî like I'm moving through life on slow speed"
+  ],
+  acetylcholine: [
+    "My memory is poor ‚Äî I forget names, conversations, where I put things",
+    "I feel like I'm slower to learn or process new information than I used to be",
+    "I experience mental fog or cloudiness that makes it hard to think clearly",
+    "I struggle to focus for extended periods of time",
+    "My creativity feels blocked or flat",
+    "I experience dry mouth or dry eyes more than normal",
+    "My thinking feels slow ‚Äî I'm not as sharp as I used to be",
+    "I struggle with word recall ‚Äî the word is there but I can't get to it",
+    "I frequently forget people's names even shortly after meeting them",
+    "I find it hard to stay engaged in conversations or follow complex ideas"
+  ],
+  gaba: [
+    "I feel anxious, tense, or on edge regularly",
+    "I can't properly relax ‚Äî even downtime feels unsatisfying",
+    "I carry physical tension in my body (jaw, neck, shoulders, chest)",
+    "I regularly feel overwhelmed by my responsibilities or workload",
+    "I have racing thoughts ‚Äî my mind won't quiet down",
+    "I have difficulty falling asleep or staying asleep",
+    "I am irritable or short-tempered more than I'd like to be",
+    "I experience heart palpitations or chest tightness under stress",
+    "I feel the need to control everything around me",
+    "I use alcohol, cannabis, or other things to decompress and calm down"
+  ],
+  serotonin: [
+    "I feel low, flat, or persistently sad without obvious reason",
+    "I have a pessimistic or negative outlook more often than not",
+    "My sleep quality is poor ‚Äî I wake up unrested",
+    "I crave carbohydrates or sweets, especially in the afternoon or evening",
+    "I am emotionally sensitive ‚Äî criticism or rejection hits hard",
+    "I feel little joy or enthusiasm for life",
+    "My self-esteem is lower than I'd like ‚Äî I doubt my worth",
+    "My mood shifts noticeably with the seasons (worse in winter/less sun)",
+    "I withdraw socially and prefer to isolate when feeling low",
+    "I feel restless, agitated, or unable to settle"
+  ]
+};
+
+// ============================================================
+// BUILD QUESTION HTML
+// ============================================================
+function buildQuestions(containerId, questions, prefix, groupName) {
+  const container = document.getElementById(containerId);
+  questions.forEach((q, i) => {
+    const n = i + 1;
+    const id = `${prefix}_${n}`;
+    container.innerHTML += `
+      <div class="bq">
+        <div class="bq-text">${n}. ${q}</div>
+        <div class="bq-score">
+          <label><input type="radio" name="${id}" value="0" required /><span>0</span></label>
+          <label><input type="radio" name="${id}" value="1" /><span>1</span></label>
+          <label><input type="radio" name="${id}" value="2" /><span>2</span></label>
+        </div>
+      </div>`;
+  });
+}
+
+buildQuestions('dom-nature-questions',  NATURE_QUESTIONS.dopamine,     'DN', 'dopamine-nature');
+buildQuestions('ach-nature-questions',  NATURE_QUESTIONS.acetylcholine, 'AN', 'ach-nature');
+buildQuestions('gaba-nature-questions', NATURE_QUESTIONS.gaba,          'GN', 'gaba-nature');
+buildQuestions('sero-nature-questions', NATURE_QUESTIONS.serotonin,     'SN', 'sero-nature');
+buildQuestions('dom-def-questions',     DEFICIENCY_QUESTIONS.dopamine,     'DD', 'dom-def');
+buildQuestions('ach-def-questions',     DEFICIENCY_QUESTIONS.acetylcholine, 'AD', 'ach-def');
+buildQuestions('gaba-def-questions',    DEFICIENCY_QUESTIONS.gaba,          'GD', 'gaba-def');
+buildQuestions('sero-def-questions',    DEFICIENCY_QUESTIONS.serotonin,     'SD', 'sero-def');
+
+// ============================================================
+// LIVE SCORING
+// ============================================================
+function getScore(prefix, count) {
+  let total = 0;
+  for (let i = 1; i <= count; i++) {
+    const el = document.querySelector(`input[name="${prefix}_${i}"]:checked`);
+    if (el) total += parseInt(el.value);
+  }
+  return total;
+}
+
+function defInterpretation(score) {
+  if (score <= 5)  return 'Low';
+  if (score <= 13) return 'Moderate';
+  return 'High';
+}
+
+function updateScores() {
+  const dn = getScore('DN', 15);
+  const an = getScore('AN', 15);
+  const gn = getScore('GN', 15);
+  const sn = getScore('SN', 15);
+  const dd = getScore('DD', 10);
+  const ad = getScore('AD', 10);
+  const gd = getScore('GD', 10);
+  const sd = getScore('SD', 10);
+
+  document.getElementById('dom-n-score').textContent  = dn;
+  document.getElementById('ach-n-score').textContent  = an;
+  document.getElementById('gaba-n-score').textContent = gn;
+  document.getElementById('sero-n-score').textContent = sn;
+  document.getElementById('dom-d-score').textContent  = dd;
+  document.getElementById('ach-d-score').textContent  = ad;
+  document.getElementById('gaba-d-score').textContent = gd;
+  document.getElementById('sero-d-score').textContent = sd;
+
+  document.getElementById('dom-d-interp').textContent  = defInterpretation(dd);
+  document.getElementById('ach-d-interp').textContent  = defInterpretation(ad);
+  document.getElementById('gaba-d-interp').textContent = defInterpretation(gd);
+  document.getElementById('sero-d-interp').textContent = defInterpretation(sd);
+
+  const natureMap = { Dopamine: dn, Acetylcholine: an, GABA: gn, Serotonin: sn };
+  const dominant = Object.entries(natureMap).sort((a,b) => b[1]-a[1])[0][0];
+  document.getElementById('dominant-nt').textContent = dominant;
+
+  // Store in hidden fields
+  document.getElementById('h_dom_nature').value  = dn;
+  document.getElementById('h_ach_nature').value  = an;
+  document.getElementById('h_gaba_nature').value = gn;
+  document.getElementById('h_sero_nature').value = sn;
+  document.getElementById('h_dom_def').value  = dd;
+  document.getElementById('h_ach_def').value  = ad;
+  document.getElementById('h_gaba_def').value = gd;
+  document.getElementById('h_sero_def').value = sd;
+  document.getElementById('h_dominant').value = dominant;
+}
+
+// ============================================================
+// ATTACHMENT STYLE SCORING (Attached by Levine & Heller)
+// A = Anxious (14 items), B = Secure (14 items), C = Avoidant (14 items)
+// ============================================================
+function calcAttachmentStyle() {
+  const aCount = document.querySelectorAll('input[name^="att_A_"]:checked').length;
+  const bCount = document.querySelectorAll('input[name^="att_B_"]:checked').length;
+  const cCoun4 = document.querySelectorAll('input[name^="att_C_"]:checked').length;
+
+  const aEl = document.getElementById('att-a-count');
+  const bEl = document.getElementById('att-b-count');
+  const cEl = document.getElementById('att-c-count');
+  const styleEl = document.getElementById('att-style-label');
+  if (aEl) aEl.textContent = aCount;
+  if (bEl) bEl.textContent = bCount;
+  if (cEl) cEl.textContent = cCount;
+
+  const hA = document.getElementById('h_att_a');
+  const hB = document.getElementById('h_att_b');
+  const hC = document.getElementById('h_att_c');
+  if (hA) hA.value = aCount;
+  if (hB) hB.value = bCount;
+  if (hC) hC.value = cCount;
+
+  const max = Math.max(aCount, bCount, cCount);
+  let style;
+  if (max === 0) {
+    style = 'Incomplete ‚Äî no statements marked';
+  } else if (aCount === max && cCount === max) {
+    style = 'Fearful-Avoidant ‚Äî high anxiety and avoidance; wants closeness but fears it';
+  } else if (aCount === max) {
+    style = 'Anxious / Preoccupied ‚Äî craves closeness, fears abandonment';
+  } else if (cCount === max) {
+    style = 'Avoidant / Dismissiv% ‚Äî values independence, uncomfortable with closeness';
+  } else {
+    style = 'Secure ‚Äî comfortable with both intimacy and independence';
+  }
+
+  if (styleEl) styleEl.textContent = style;
+  return style + ' (A:' + aCount + ' B:' + bCount + ' C:' + cCount + ')';
+}
+
+// Attach listeners to radio and attachment checkbox inputs
+document.addEventListener('change', (e) => {
+  if (e.target.type === 'radio') updateScores();
+  if (e.target.type === 'checkbox' && e.target.name && e.target.name.startsWith('att_')) calcAttachmentStyle();
+});
+
+// ============================================================
+// FORM SUBMISSION
+// ============================================================
+document.getElementById('onboarding-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  // Final score capture
+  updateScores();
+  document.getElementById('h_attachment').value = calcAttachmentStyle();
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  // Submit via FormSubmit.co
+  // IMPORTANT: Replace JOSH_EMAIL below with josh@uncmp.com on first activation
+  const SUBMIT_URL = 'https://formsubmit.co/josh@uncmp.com';
+
+  try {
+    const response = await fetch(SUBMIT_URL, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (response.ok || response.redirected) {
+      form.style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // ‚îÄ‚îÄ ClickUp Task Creation ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+      const firstName  = formData.get('First_Name')  || '';
+      const lastName   = formData.get('Last_Name')   || '';
+      const email      = formData.get('Email')       || '';
+      const domNT      = formData.get('Dominant_Neurotransmitter') || '';
+      const attachment = formData.get('Attachment_Style') || '';
+
+      const dopNature  = formData.get('Dopamine_Nature_Score')         || '0';
+      const achNature  = formData.get('Acetylcholine_Nature_Score')    || '0';
+      const gabaNature = formData.get('GABA_Nature_Score')             || '0';
+      const serNature  = formData.get('Serotonin_Nature_Score')        || '0';
+      const dopDef     = formData.get('Dopamine_Deficiency_Score')     || '0';
+      const achDef     = formData.get('Acetylcholine_Deficiency_Score')|| '0';
+      const gabaDef    = formData.get('GABA_Deficiency_Score')         || '0';
+      const serDef     = formData.get('Serotonin_Deficiency_Score')    || '0';
+
+      const taskDescription =
+        `## New Client Onboarding\n\n` +
+        `**Name:** ${firstName} ${lastName}\n` +
+        `**Email:** ${email}\n\n` +
+        `---\n\n` +
+        `### Braverman Nature Scores\n` +
+        `| Neurotransmitter | Nature | Deficiency |\n` +
+        `|------------------|--------|------------|\n` +
+        `| Dopamine         | ${dopNature}  | ${dopDef}  |\n` +
+        `| Acetylcholine    | ${achNature}  | ${achDef}  |\n` +
+        `| GABA             | ${gabaNature} | ${gabaDef} |\n` +
+        `| Serotonin        | ${serNature}  | ${serDef}  |\n\n` +
+        `**Dominant Neurotransmitter:** ${domNT}\n` +
+        `**Attachment Style:** ${attachment}\n`;
+
+      fetch('https://api.clickup.com/api/v2/list/901614136745/task', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'pk_48610946_SK2H0FUX6BPXCAWS6G45E6OYCL8OZ9NV',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: `New UCMP Onboarding ‚Äî ${firstName} ${lastName}`,
+          description: taskDescription,
+          status: 'to do',
+          custom_fields: []
+        })
+      }).catch(function() {
+        // Silently fail ‚Äî email via formsubmit.co already captured the data
+      });
+      // ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ‚îÄ
+
+    } else {
+      alert('Something went wrong. Please try again or contact your coach directly.');
+    }
+  } catch (err) {
+    // Fallback: open mailto with summary
+    const name = formData.get('First_Name') + ' ' + formData.get('Last_Name');
+    const mailto = `mailto:josh@uncmp.com?subject=UCMP Onboarding ‚Äî ${name}&body=Form submission from ${name} (${formData.get('Email')})%0A%0ABraverman Scores:%0ADopamine Nature: ${formData.get('Dopamine_Nature_Score')}%0AAcetylcholine Nature: ${formData.get('Acetylcholine_Nature_Score')}%0AGABA Nature: ${formData.get('GABA_Nature_Score')}%0ASerotonin Nature: ${formData.get('Serotonin_Nature_Score')}%0A%0ADopamine Deficiency: ${formData.get('Dopamine_Deficiency_Score')}%0AAcetylcholine Deficiency: ${formData.get('Acetylcholine_Deficiency_Score')}%0AGABA Deficiency: ${formData.get('GABA_Deficiency_Score')}%0ASerotonin Deficiency: ${formData.get('Serotonin_Deficiency_Score')}%0A%0ADominant: ${formData.get('Dominant_Neurotransmitter')}%0AAttachment: ${formData.get('Attachment_Style')}`;
+    window.location.href = mailto;
+  }
+});
+</script>
+
+</body>
+</html>
