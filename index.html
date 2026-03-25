@@ -6,7 +6,8 @@
 <title>UCMP Onboarding</title>
 </head>
 <body>
-<style>    :root {
+<style>
+    :root {
       --bg: #0d0d0d;
       --surface: #161616;
       --surface2: #1e1e1e;
@@ -87,9 +88,7 @@
       text-transform: uppercase;
     }
     .section-body { padding: 24px; }
-    .field {
-      margin-bottom: 22px;
-    }
+    .field { margin-bottom: 22px; }
     .field:last-child { margin-bottom: 0; }
     label {
       display: block;
@@ -124,7 +123,7 @@
     select option { background: #1e1e1e; }
     textarea { resize: vertical; min-height: 80px; }
     .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .radio-group, .braverman-group {
+    .radio-group {
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -143,8 +142,46 @@
     .radio-option:hover { border-color: var(--accent2); background: #141414; }
     .radio-option input { accent-color: var(--accent); cursor: pointer; }
     .radio-option span { font-family: Arial, sans-serif; font-size: 0.9rem; }
+    .radio-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .radio-row .radio-option { flex: 1; min-width: 100px; }
 
-    /* Braverman Question Styles */
+    /* Star Rating */
+    .star-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .star-row .star {
+      font-size: 1.8rem;
+      color: #3a3a3a;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.1s, transform 0.1s;
+      user-select: none;
+    }
+    .star-row .star.active { color: var(--accent); }
+    .star-row .star:hover { transform: scale(1.1); }
+    .star-end-labels {
+      display: flex;
+      justify-content: space-between;
+      font-family: Arial, sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .star-selected-val {
+      font-family: Arial, sans-serif;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-top: 6px;
+      min-height: 18px;
+    }
+
+    /* Braverman */
     .braverman-instructions {
       background: #1a1a0f;
       border: 1px solid var(--accent2);
@@ -155,7 +192,7 @@
       font-size: 0.88rem;
       color: var(--text-muted);
     }
-  2 .braverman-instructions strong { color: var(--accent); }
+    .braverman-instructions strong { color: var(--accent); }
     .braverman-section-label {
       font-size: 0.8rem;
       letter-spacing: 0.1em;
@@ -167,7 +204,7 @@
       font-family: Arial, sans-serif;
     }
     .bq {
-   2  display: grid;
+      display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
       gap: 16px;
@@ -175,15 +212,8 @@
       border-bottom: 1px solid #1e1e1e;
     }
     .bq:last-child { border-bottom: none; }
-    .bq-text {
-      font-family: Arial, sans-serif;
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-    .bq-score {
-      display: flex;
-      gap: 6px;
-    }
+    .bq-text { font-family: Arial, sans-serif; font-size: 0.9rem; color: var(--text); }
+    .bq-score { display: flex; gap: 6px; }
     .bq-score label {
       display: flex;
       flex-direction: column;
@@ -215,11 +245,7 @@
       text-transform: uppercase;
       margin-bottom: 14px;
     }
-    .score-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
+    .score-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .score-item {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -241,27 +267,23 @@
     .dominant-box .label { color: var(--text-muted); font-size: 0.8rem; }
     .dominant-box .value { color: var(--accent); font-size: 1.1rem; margin-top: 4px; }
 
-    /* Attachment Style */
-    .attachment-q {
-      margin-bottom: 20px;
-    }
-    .attachment-q .q-text {
-      font-size: 0.95rem;
-      margin-bottom: 10px;
-      color: var(--text);
-    }
+    /* Attachment */
+    .att-table{border-collapse:collapse;width:100%;font-family:Arial,sans-serif;font-size:0.85rem;margin-bottom:24px}
+    .att-table thead th{background:#222;padding:6px 8px;text-align:center;font-weight:600;font-size:0.8rem;border:1px solid #333;color:var(--text-muted)}
+    .att-table thead th.att-stmt-th{text-align:left;width:72%}
+    .att-table tbody tr:nth-child(even){background:#111}
+    .att-table tbody td{padding:7px 8px;border:1px solid #2a2a2a;vertical-align:middle;font-family:Arial,sans-serif;font-size:0.84rem;color:var(--text)}
+    .att-table tbody td.att-check{text-align:center;width:9.3%}
+    .att-table input[type="checkbox"]{width:18px;height:18px;cursor:pointer;accent-color:var(--accent)}
+    .att-scores{display:flex;gap:20px;flex-wrap:wrap;background:#1a1a0f;border:1px solid var(--accent2);border-radius:8px;padding:12px 16px;margin-bottom:16px;align-items:center}
+    .att-sc{font-family:Arial,sans-serif;font-size:0.85rem;text-align:center}
+    .att-sc .sc-num{font-size:1.6rem;font-weight:700;color:var(--accent);line-height:1}
+    .att-sc .sc-lbl{font-size:0.75rem;color:var(--text-muted);margin-top:2px}
+    .att-dominant{font-family:Arial,sans-serif;font-size:0.9rem;font-weight:600;margin-bottom:20px;padding:8px 12px;background:#1a1a0f;border:1px solid var(--accent2);border-radius:6px;display:inline-block;color:var(--accent)}
 
     /* Submit */
-    .submit-section {
-      text-align: center;
-      padding: 40px 24px;
-    }
-    .submit-section p {
-      color: var(--text-muted);
-      font-family: Arial, sans-serif;
-      font-size: 0.9rem;
-      margin-bottom: 24px;
-    }
+    .submit-section { text-align: center; padding: 40px 24px; }
+    .submit-section p { color: var(--text-muted); font-family: Arial, sans-serif; font-size: 0.9rem; margin-bottom: 24px; }
     button[type="submit"] {
       background: var(--accent);
       color: #0d0d0d;
@@ -277,7 +299,6 @@
     }
     button[type="submit"]:hover { background: var(--accent2); }
     button[type="submit"]:active { transform: scale(0.98); }
-
     .success-message {
       display: none;
       background: #0d1f0d;
@@ -289,16 +310,16 @@
     }
     .success-message h2 { color: var(--success); margin-bottom: 12px; }
     .success-message p { color: var(--text-muted); font-family: Arial, sans-serif; }
-
     @media (max-width: 600px) {
       .row-2 { grid-template-columns: 1fr; }
       .score-grid { grid-template-columns: 1fr; }
       .bq { grid-template-columns: 1fr; }
       .bq-score { justify-content: flex-start; }
       .hero h1 { font-size: 1.5rem; }
+      .radio-row { flex-direction: column; }
     }
-  </style>
 </style>
+
 <div class="hero">
   <h1>Uncommon Man Project</h1>
   <p>Welcome. This form helps your coach understand where you're at so we can make the most of our time together. Take your time — be honest, it's just for us.</p>
@@ -319,7 +340,6 @@
 <input type="hidden" id="h_gaba_def" name="GABA_Deficiency_Score" value="0" />
 <input type="hidden" id="h_sero_def" name="Serotonin_Deficiency_Score" value="0" />
 <input type="hidden" id="h_dominant" name="Dominant_Neurotransmitter" value="" />
-<input type="hidden" id="h_attachment" name="Attachment_Style" value="" />
 
 <!-- ===== SECTION 1: PERSONAL ===== -->
 <div class="section">
@@ -328,7 +348,7 @@
     <div class="row-2">
       <div class="field">
         <label>First Name <span class="req">*</span></label>
-        <input type="4ext" name="First_Name" required placeholder="e.g. Chris" />
+        <input type="text" name="First_Name" required placeholder="e.g. Chris" />
       </div>
       <div class="field">
         <label>Last Name <span class="req">*</span></label>
@@ -360,6 +380,7 @@
       <select name="Relationship_Status">
         <option value="">— Select —</option>
         <option>Single</option>
+        <option>Dating</option>
         <option>In a relationship</option>
         <option>Married</option>
         <option>Separated / Divorcing</option>
@@ -402,10 +423,34 @@
       <div class="field">
         <label>Industry / Niche</label>
         <input type="text" name="Industry" placeholder="e.g. Construction, Finance, Trade" />
-      </d)v>
+      </div>
       <div class="field">
-        <label>Years in Business</label>
+        <label>Years in Business / Career</label>
         <input type="number" name="Years_In_Business" min="0" placeholder="e.g. 8" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Describe your business / occupation in 2–3 sentences</label>
+      <textarea name="Business_Description" placeholder="What do you do, who do you serve, how do you make money?"></textarea>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label>How much do you currently make? <span class="hint">Personal income (annual)</span></label>
+        <input type="text" name="Income_Personal" placeholder="e.g. $120k / year" />
+      </div>
+      <div class="field">
+        <label>Business revenue <span class="hint">If you own a business (annual)</span></label>
+        <input type="text" name="Income_Business_Current" placeholder="e.g. $800k / year" />
+      </div>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label>How much would you realistically like to be making? <span class="hint">Personal income</span></label>
+        <input type="text" name="Income_Target" placeholder="e.g. $300k / year" />
+      </div>
+      <div class="field">
+        <label>Business revenue target <span class="hint">If applicable</span></label>
+        <input type="text" name="Income_Business_Target" placeholder="e.g. $2M / year" />
       </div>
     </div>
     <div class="row-2">
@@ -434,16 +479,12 @@
         </select>
       </div>
     </div>
-    <div class="field">
-      <label>Describe your business in 2–3 sentences</label>
-      <textarea name="Business_Description" placeholder="What do you do, who do you serve, how do you make money?"></textarea>
-    </div>
   </div>
 </div>
 
 <!-- ===== SECTION 3: HEALTH ===== -->
 <div class="section">
-  <div class="section-header"><div cl!ss="num">3</div><h2>Health & Lifestyle</h2></div>
+  <div class="section-header"><div class="num">3</div><h2>Health & Lifestyle</h2></div>
   <div class="section-body">
     <div class="row-2">
       <div class="field">
@@ -455,23 +496,73 @@
         <input type="number" name="Height_cm" min="140" max="220" placeholder="e.g. 183" />
       </div>
     </div>
-    <div class="field">
-      <label>Rate your overall health right now (1 = terrible, 10 = optimal)</label>
-      <select name="Health_Rating">
-        <option value="">— Select —</option>
-        <option>1 — Struggling</option>
-        <option>2</option><option>3</option><option>4</option><option>5 — Average</option>
-        <option>6</option><option>7</option><option>8</option><option>9</option>
-        <option>10 — Optimal</option>
-      </select>
+    <div class="row-2">
+      <div class="field">
+        <label>How many hours of sleep do you get? <span class="hint">On average per night</span></label>
+        <select name="Sleep_Hours">
+          <option value="">— Select —</option>
+          <option>Less than 5 hours</option>
+          <option>5 hours</option>
+          <option>6 hours</option>
+          <option>7 hours</option>
+          <option>8 hours</option>
+          <option>9+ hours</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Rate your overall health right now <span class="hint">1 = terrible · 10 = optimal</span></label>
+        <select name="Health_Rating">
+          <option value="">— Select —</option>
+          <option>1 — Struggling</option>
+          <option>2</option><option>3</option><option>4</option><option>5 — Average</option>
+          <option>6</option><option>7</option><option>8</option><option>9</option>
+          <option>10 — Optimal</option>
+        </select>
+      </div>
     </div>
     <div class="field">
-      <label>How is your sleep? <span class="hint">Hours per night, quality, any issues</span></label>
-      <textarea name="Sleep" rows="2" placeholder="e.g. 6–7 hours, light sleeper, trouble switching off"></textarea>
+      <label>Rate your stress levels <span class="req">*</span><span class="hint">1 = totally chill · 5 = hyper stressed</span></label>
+      <div class="star-row" id="stress-stars">
+        <span class="star" data-val="1">★</span>
+        <span class="star" data-val="2">★</span>
+        <span class="star" data-val="3">★</span>
+        <span class="star" data-val="4">★</span>
+        <span class="star" data-val="5">★</span>
+      </div>
+      <div class="star-end-labels"><span>Chill</span><span>Hyper Stressed</span></div>
+      <div class="star-selected-val" id="stress-stars-display"></div>
+      <input type="hidden" name="Stress_Level" id="Stress_Level_val" value="" />
     </div>
     <div class="field">
-      <label>Current exercise / training</label>
-      <textarea name="Exercise" rows="2" placeholder="e.g. Gym 3x/week, occasional run, nothing right now"></textarea>
+      <label>How is your sleep quality? <span class="hint">Any issues, patterns, what affects it</span></label>
+      <textarea name="Sleep_Quality" rows="2" placeholder="e.g. Light sleeper, trouble switching off, wake at 3am..."></textarea>
+    </div>
+    <div class="field">
+      <label>Do you exercise consistently?</label>
+      <div class="radio-row">
+        <label class="radio-option"><input type="radio" name="Exercise_Consistent" value="Yes" /><span>Yes</span></label>
+        <label class="radio-option"><input type="radio" name="Exercise_Consistent" value="No" /><span>No</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label>If yes — what do you do, how often, and how intensely?</label>
+      <textarea name="Exercise_Details" rows="2" placeholder="e.g. Gym 4x/week, moderate intensity. Weekend runs..."></textarea>
+      <div style="margin-top:10px;">
+        <label style="font-size:0.85rem;color:var(--text-muted);margin-bottom:6px;">Intensity level:</label>
+        <div class="radio-row">
+          <label class="radio-option"><input type="radio" name="Exercise_Intensity" value="Mild" /><span>Mild</span></label>
+          <label class="radio-option"><input type="radio" name="Exercise_Intensity" value="Moderate" /><span>Moderate</span></label>
+          <label class="radio-option"><input type="radio" name="Exercise_Intensity" value="High" /><span>High</span></label>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Do you wear a biomarker tracking device? <span class="hint">e.g. WHOOP, Oura Ring, Garmin, Apple Watch, etc.</span></label>
+      <div class="radio-row" style="margin-bottom:10px;">
+        <label class="radio-option"><input type="radio" name="Biomarker_Device" value="Yes" /><span>Yes</span></label>
+        <label class="radio-option"><input type="radio" name="Biomarker_Device" value="No" /><span>No</span></label>
+      </div>
+      <input type="text" name="Biomarker_Device_Name" placeholder="Which device? e.g. WHOOP 4.0" />
     </div>
     <div class="field">
       <label>Diet / eating habits</label>
@@ -530,17 +621,170 @@
   </div>
 </div>
 
-<!-- ===== SECTION 5: GOALS & MINDSET ===== -->
+<!-- ===== SECTION 5: INTIMACY & RELATIONSHIPS ===== -->
 <div class="section">
-  <div class="section-header"><div class="num">5</div><h2>Goals & Mindset</h2></div>
+  <div class="section-header"><div class="num">5</div><h2>Intimacy & Relationships</h2></div>
   <div class="section-body">
     <div class="field">
-      <label>Why did you decide to invest in yourself right now? <span class="req">*</span></label>
-      <textarea name="Why_Now" required placeholder="What was the moment or realisation that made you say yes to this?"></textarea>
+      <label>How would you describe your current intimate relationship(s)? <span class="req">*</span></label>
+      <textarea name="Intimate_Relationship_Desc" required placeholder="Be honest — what's the dynamic? What's working? What isn't?"></textarea>
     </div>
     <div class="field">
-      <label>What are your top 3 goals for this program? <span class="req">*</span></label>
-      <textarea name="Top_3_Goals" required placeholder="1. ...\n2. ...\n3. ..."></textarea>
+      <label>What are the biggest challenges you face in intimacy and connection right now? <span class="req">*</span></label>
+      <textarea name="Intimacy_Challenges" required placeholder="e.g. Emotional distance, lack of sex, can't be vulnerable, always in my head..."></textarea>
+    </div>
+    <div class="field">
+      <label>Do you feel respected and desired in your relationship?</label>
+      <div class="radio-row">
+        <label class="radio-option"><input type="radio" name="Respected_Desired" value="Yes" /><span>Yes</span></label>
+        <label class="radio-option"><input type="radio" name="Respected_Desired" value="No" /><span>No</span></label>
+        <label class="radio-option"><input type="radio" name="Respected_Desired" value="Sometimes" /><span>Sometimes</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Why, or why not?</label>
+      <textarea name="Respected_Why" placeholder="What does that dynamic actually look like day to day?"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 6: COACHING GOALS & VISION ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">6</div><h2>Coaching Goals & Vision</h2></div>
+  <div class="section-body">
+    <div class="field">
+      <label>What do you want most from this coaching container? <span class="req">*</span></label>
+      <textarea name="Coaching_Want_Most" required placeholder="Not what you think you should want — what do you actually want?"></textarea>
+    </div>
+    <div class="field">
+      <label>Where do you see yourself in 6 months if things go right? <span class="req">*</span></label>
+      <textarea name="Vision_6_Months" required placeholder="Be specific — relationship, business, how you feel in your body, how you show up..."></textarea>
+    </div>
+    <div class="field">
+      <label>Where do you see yourself in 12 months if things go right? <span class="req">*</span></label>
+      <textarea name="Vision_12_Months" required placeholder="Paint the full picture — who are you, what have you built, how do the people around you experience you?"></textarea>
+    </div>
+    <div class="field">
+      <label>What would you consider a breakthrough result from this coaching?</label>
+      <textarea name="Breakthrough_Result" placeholder="If this coaching changed one thing in a way that made everything else feel different — what would that be?"></textarea>
+    </div>
+    <div class="field">
+      <label>What are the biggest obstacles that have kept you from creating the results you want in the past?</label>
+      <textarea name="Biggest_Obstacles" placeholder="Be honest — what has actually stopped you? Fear, time, money, people, yourself?"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 7: PSYCHOLOGY & IDENTITY ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">7</div><h2>Psychology & Identity</h2></div>
+  <div class="section-body">
+    <div class="field">
+      <label>What patterns or habits do you want to break? <span class="req">*</span></label>
+      <textarea name="Patterns_To_Break" required placeholder="e.g. Numbing out with alcohol, avoiding hard conversations, chasing validation, overworking..."></textarea>
+    </div>
+    <div class="field">
+      <label>What tends to trigger you emotionally most often? <span class="req">*</span><span class="hint">e.g. anger, frustration, anxiety, shame — and what sets them off</span></label>
+      <textarea name="Emotional_Triggers" required placeholder="e.g. When I feel disrespected, when my partner pulls away, when I fail at something publicly..."></textarea>
+    </div>
+    <div class="field">
+      <label>Why is NOW the time you're committing to this change? <span class="req">*</span></label>
+      <textarea name="Why_Now_Commit" required placeholder="What made you say yes to this? What would it cost you to wait another year?"></textarea>
+    </div>
+    <div class="field">
+      <label>How committed are you to showing up fully for this coaching process? <span class="req">*</span><span class="hint">1 = not at all · 10 = fully committed, whatever it takes</span></label>
+      <div class="star-row" id="commitment-stars">
+        <span class="star" data-val="1">★</span>
+        <span class="star" data-val="2">★</span>
+        <span class="star" data-val="3">★</span>
+        <span class="star" data-val="4">★</span>
+        <span class="star" data-val="5">★</span>
+        <span class="star" data-val="6">★</span>
+        <span class="star" data-val="7">★</span>
+        <span class="star" data-val="8">★</span>
+        <span class="star" data-val="9">★</span>
+        <span class="star" data-val="10">★</span>
+      </div>
+      <div class="star-end-labels"><span>Not At All</span><span>Very Committed</span></div>
+      <div class="star-selected-val" id="commitment-stars-display"></div>
+      <input type="hidden" name="Commitment_Level" id="Commitment_Level_val" value="" />
+    </div>
+    <div class="field">
+      <label>What would stop you from following through — and how should I hold you accountable if that happens?</label>
+      <textarea name="Accountability" placeholder="Be real — what's the pattern you fall into when things get hard or uncomfortable?"></textarea>
+    </div>
+    <div class="field">
+      <label>How much do you actually respect the man you currently are? <span class="hint">Be honest — not who you're trying to be, who you are right now</span></label>
+      <textarea name="Self_Respect" placeholder="e.g. Not much — I've compromised too much. / I respect some parts, but I'm ashamed of others..."></textarea>
+    </div>
+    <div class="field">
+      <label>What did your father model about what it means to be a man?</label>
+      <textarea name="Father_Model" placeholder="e.g. Work hard, don't show emotion, provide but don't connect. / He wasn't around. / He was present but..."></textarea>
+    </div>
+    <div class="field">
+      <label>Growing up, what kind of man were you told — directly or indirectly — that you were supposed to be?</label>
+      <textarea name="Identity_Conditioning" placeholder="e.g. Tough, don't need help, success = worth. / Be the good son. / No real blueprint — I was left to figure it out..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 8: DEEP REFLECTION ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">8</div><h2>Deep Reflection</h2></div>
+  <div class="section-body">
+    <p style="font-family:Arial,sans-serif;font-size:0.85rem;color:var(--text-muted);margin-bottom:24px;font-style:italic;">This section goes deep. Take your time. There are no wrong answers — only honest ones.</p>
+    <div class="field">
+      <label>What is the harshest thing you regularly say to yourself? <span class="req">*</span></label>
+      <textarea name="Harsh_Self_Talk" required placeholder="The voice in your head — what does it say when you're struggling or make a mistake?"></textarea>
+    </div>
+    <div class="field">
+      <label>What are you most ashamed of? <span class="req">*</span></label>
+      <textarea name="Ashamed_Of" required placeholder="The thing you haven't said out loud. You don't have to — but if you're ready, this is the place."></textarea>
+    </div>
+    <div class="field">
+      <label>Do you have a clear sense of your purpose beyond your roles? <span class="req">*</span><span class="hint">1 = none at all · 10 = completely clear</span></label>
+      <div class="star-row" id="purpose-stars">
+        <span class="star" data-val="1">★</span>
+        <span class="star" data-val="2">★</span>
+        <span class="star" data-val="3">★</span>
+        <span class="star" data-val="4">★</span>
+        <span class="star" data-val="5">★</span>
+        <span class="star" data-val="6">★</span>
+        <span class="star" data-val="7">★</span>
+        <span class="star" data-val="8">★</span>
+        <span class="star" data-val="9">★</span>
+        <span class="star" data-val="10">★</span>
+      </div>
+      <div class="star-end-labels"><span>No clarity</span><span>Crystal clear</span></div>
+      <div class="star-selected-val" id="purpose-stars-display"></div>
+      <input type="hidden" name="Purpose_Clarity" id="Purpose_Clarity_val" value="" />
+    </div>
+    <div class="field">
+      <label>When did you last feel genuinely alive — and why? <span class="req">*</span></label>
+      <textarea name="When_Felt_Alive" required placeholder="A moment, a season, a version of yourself — what was happening? What was different?"></textarea>
+    </div>
+    <div class="field">
+      <label>Are there emotions you've never allowed yourself to fully feel? What were they, and why did you feel you couldn't express them?</label>
+      <textarea name="Unexpressed_Emotions" placeholder="e.g. Grief. I wasn't allowed to be weak. / Fear. Men don't do that. / Tenderness — felt like a liability..."></textarea>
+    </div>
+    <div class="field">
+      <label>What is the real reason you're here right now? <span class="req">*</span><span class="hint">Not the polished answer — the real one</span></label>
+      <textarea name="Real_Reason_Here" required placeholder="Go deeper than 'I want to grow my business' or 'improve my relationship'. What's underneath that?"></textarea>
+    </div>
+    <div class="field">
+      <label>What are you most afraid this coaching will ask of you? <span class="req">*</span></label>
+      <textarea name="Afraid_Of_Coaching" required placeholder="What feels like the edge? What do you hope I don't bring up?"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 9: GOALS & MINDSET ===== -->
+<div class="section">
+  <div class="section-header"><div class="num">9</div><h2>Additional Context</h2></div>
+  <div class="section-body">
+    <div class="field">
+      <label>What are your top 3 goals for this program?</label>
+      <textarea name="Top_3_Goals" placeholder="1. ...\n2. ...\n3. ..."></textarea>
     </div>
     <div class="field">
       <label>What's the biggest challenge you're facing right now?</label>
@@ -549,10 +793,6 @@
     <div class="field">
       <label>What have you already tried to fix it?</label>
       <textarea name="Already_Tried" placeholder="Books, therapy, courses, coaches, nothing..."></textarea>
-    </div>
-    <div class="field">
-      <label>Where do you want to be in 12 months?</label>
-      <textarea name="Vision_12_Months" placeholder="Paint the picture — business, relationship, health, how you feel day to day."></textarea>
     </div>
     <div class="field">
       <label>What's your biggest recent WIN?</label>
@@ -567,27 +807,14 @@
       <textarea name="Anything_Else" placeholder="Anything at all — context, history, something you want to flag"></textarea>
     </div>
   </div>
-</div><style>
-.att-table{border-collapse:collapse;width:100%;font-family:Arial,sans-serif;font-size:0.85rem;margin-bottom:24px}
-.att-table thead th{background:#f0f0f0;padding:6px 8px;text-align:center;font-weight:600;font-size:0.8rem;border:1px solid #ddd}
-.att-table thead th.att-stmt-th{text-align:left;width:72%}
-.att-table tbody tr:nth-child(even){background:#fafafa}
-.att-table tbody td{padding:7px 8px;border:1px solid #ddd;vertical-align:middle;font-family:Arial,sans-serif;font-size:0.84rem}
-.att-table tbody td.att-check{text-align:center;width:9.3%}
-.att-table input[type="checkbox"]{width:18px;height:18px;cursor:pointer;accent-color:#0066cc}
-.att-scores{display:flex;gap:20px;flex-wrap:wrap;background:#f0f7ff;border:1px solid #c0d8f0;border-radius:8px;padding:12px 16px;margin-bottom:16px;align-items:center}
-.att-sc{font-family:Arial,sans-serif;font-size:0.85rem;text-align:center}
-.att-sc .sc-num{font-size:1.6rem;font-weight:700;color:#0055aa;line-height:1}
-.att-sc .sc-lbl{font-size:0.75rem;color:#555;margin-top:2px}
-.att-dominant{font-family:Arial,sans-serif;font-size:0.9rem;font-weight:600;margin-bottom:20px;padding:8px 12px;background:#e8f0fe;border-radius:6px;display:inline-block}
-</style>
+</div>
 
-<!-- ===== SECTION 6: ATTACHMENT STYLE ===== -->
+<!-- ===== SECTION 10: ATTACHMENT STYLE ===== -->
 <div class="section">
-  <div class="section-header"><div class="num">6</div><h2>Attachment Style</h2></div>
+  <div class="section-header"><div class="num">10</div><h2>Attachment Style</h2></div>
   <div class="section-body">
-    <p style="font-family:Arial,sans-serif;font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Check the box next to each statement that is <strong>TRUE</strong> for you. If the answer is untrue, <em>don’t</em> mark it at all.</p>
-    <p style="font-family:Arial,sans-serif;font-size:0.78rem;color:var(--text-muted);margin-bottom:20px;font-style:italic;">Adapted from Fraley, Waller &amp; Brennan’s ECR-R Questionnaire, as used in <em>Attached</em> by Dr Amir Levine &amp; Rachel Heller.</p>
+    <p style="font-family:Arial,sans-serif;font-size:0.85rem;color:var(--text-muted);margin-bottom:8px;">Check the box next to each statement that is <strong>TRUE</strong> for you. If the answer is untrue, <em>don't</em> mark it at all.</p>
+    <p style="font-family:Arial,sans-serif;font-size:0.78rem;color:var(--text-muted);margin-bottom:20px;font-style:italic;">Adapted from Fraley, Waller &amp; Brennan's ECR-R Questionnaire, as used in <em>Attached</em> by Dr Amir Levine &amp; Rachel Heller.</p>
 
     <table class="att-table">
       <thead>
@@ -597,53 +824,53 @@
       <tbody>
         <tr><td>I often worry that my partner will stop loving me.</td><td class="att-check"><input type="checkbox" name="att_A_1" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
         <tr><td>I find it easy to be affectionate with my partner.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_1" value="1" /></td><td class="att-check"></td></tr>
-        <tr><td>I fear that once someone gets to know the real me, s/he won’t like who I am.</td><td class="att-check"><input type="checkbox" name="att_A_2" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
-        <tr><td>I find that I bounce back quickly after a breakup. It’s weird how I can just put someone out of my mind.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_1" value="1" /></td></tr>
-        <tr><td>When I’m not involved in a relationship, I feel somewhat anxious and incomplete.</td><td class="att-check"><input type="checkbox" name="!tt_A_3" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I fear that once someone gets to know the real me, s/he won't like who I am.</td><td class="att-check"><input type="checkbox" name="att_A_2" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I find that I bounce back quickly after a breakup. It's weird how I can just put someone out of my mind.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_1" value="1" /></td></tr>
+        <tr><td>When I'm not involved in a relationship, I feel somewhat anxious and incomplete.</td><td class="att-check"><input type="checkbox" name="att_A_3" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
         <tr><td>I find it difficult to emotionally support my partner when s/he is feeling down.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_2" value="1" /></td></tr>
-        <tr><td>When my partner is away, I’m afraid that s/he might become interested in someone else.</td><td class="att-check"><input type="checkbox" name="att_A_4" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>When my partner is away, I'm afraid that s/he might become interested in someone else.</td><td class="att-check"><input type="checkbox" name="att_A_4" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
         <tr><td>I feel comfortable depending on romantic partners.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_2" value="1" /></td><td class="att-check"></td></tr>
         <tr><td>My independence is more important to me than my relationships.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_3" value="1" /></td></tr>
         <tr><td>I prefer not to share my innermost feelings with my partner.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_4" value="1" /></td></tr>
-        <tr><td>When I show my partner how I feel, I’m afraid s/he will not feel the same about me.</td><td class="att-check"><input type="checkbox" name="att_A_5" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>When I show my partner how I feel, I'm afraid s/he will not feel the same about me.</td><td class="att-check"><input type="checkbox" name="att_A_5" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
         <tr><td>I am generally satisfied with my romantic relationships.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_3" value="1" /></td><td class="att-check"></td></tr>
-        <tr><td>I don’t feel the need to act out much in my romantic relationships.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_4" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>I don't feel the need to act out much in my romantic relationships.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_4" value="1" /></td><td class="att-check"></td></tr>
         <tr><td>I think about my relationships a lot.</td><td class="att-check"><input type="checkbox" name="att_A_6" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
         <tr><td>I find it difficult to depend on romantic partners.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_5" value="1" /></td></tr>
         <tr><td>I tend to get very quickly attached to a romantic partner.</td><td class="att-check"><input type="checkbox" name="att_A_7" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
         <tr><td>I have little difficulty expressing my needs and wants to my partner.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_5" value="1" /></td><td class="att-check"></td></tr>
         <tr><td>I sometimes feel angry or annoyed with my partner without knowing why.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_6" value="1" /></td></tr>
-        <tr><td>I am very sensitive to my partner’s moods.</td><td class="att-check"><input type="checkbox" name="att_A_8" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I am very sensitive to my partner's moods.</td><td class="att-check"><input type="checkbox" name="att_A_8" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
         <tr><td>I believe most people are essentially honest and dependable.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_6" value="1" /></td><td class="att-check"></td></tr>
         <tr><td>I prefer casual sex with uncommitted partners to intimate sex with one person.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_7" value="1" /></td></tr>
-        <tr><td>I’m comfortable sharing my personal thoughts and feelings with my partner.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_7" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>I'm comfortable sharing my personal thoughts and feelings with my partner.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_7" value="1" /></td><td class="att-check"></td></tr>
         <tr><td>I worry that if my partner leaves me I might never find someone else.</td><td class="att-check"><input type="checkbox" name="att_A_9" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
         <tr><td>It makes me nervous when my partner gets too close.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_8" value="1" /></td></tr>
         <tr><td>During a conflict, I tend to impulsively do or say things I later regret, rather than be able to reason about things.</td><td class="att-check"><input type="checkbox" name="att_A_10" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
-        <tr><td>An argument with my partner doesn’t usually cause me to question our entire relationship.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_8" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>An argument with my partner doesn't usually cause me to question our entire relationship.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_8" value="1" /></td><td class="att-check"></td></tr>
         <tr><td>My partners often want me to be more intimate than I feel comfortable being.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_9" value="1" /></td></tr>
-        <tr><td>I worry that I’m not attractive enough.</td><td class="att-check"><input type="checkbox" name="att_A_11" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>I worry that I'm not attractive enough.</td><td class="att-check"><input type="checkbox" name="att_A_11" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
         <tr><td>Sometimes people see me as boring because I create little drama in relationships.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_9" value="1" /></td><td class="att-check"></td></tr>
-        <tr><td>I miss my partner when we’re apart, but then when we’re together I feel the need to escape.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_10" value="1" /></td></tr>
+        <tr><td>I miss my partner when we're apart, but then when we're together I feel the need to escape.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_10" value="1" /></td></tr>
         <tr><td>When I disagree with someone, I feel comfortable expressing my opinions.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_10" value="1" /></td><td class="att-check"></td></tr>
         <tr><td>I hate feeling that other people depend on me.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_11" value="1" /></td></tr>
-        <tr><td>If I notice that someone I’m interested in is checking out other people, I don’t let it faze me. I might feel a pang of jealousy, but it’s fleeting.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_11" value="1" /></td><td class="att-check"></td></tr>
-        <tr><td>If I notice that someone I’m interested in is checking out other people, I feel relieved — it means s/he’s not looking to make things exclusive.</td><td class="att-check"></td><td cl!ss="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_12" value="1" /></td></tr>
-        <tr><td>If I notice that someone I’m interested in is checking out other people, it makes me feel depressed.</td><td class="att-check"><input type="checkbox" name="att_A_12" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
-        <tr><td>If someone I’ve been dating begins to act cold and distant, I may wonder what’s happened, but I’ll know it’s probably not about me.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_12" value="1" /></td><td class="att-check"></td></tr>
-        <tr><td>If someone I’ve been dating begins to act cold and distant, I’ll probably be indifferent; I might even be relieved.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_13" value="1" /></td></tr>
-        <tr><td>If someone I’ve been dating begins to act cold and distant, I’ll worry that I’ve done something wrong.</td><td class="att-check"><input type="checkbox" name="att_A_13" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
-        <tr><td>If my partner was to break up with me, I’d try my best to show her/him what s/he is missing (a little jealousy can’t hurt).</td><td class="att-check"><input type="checkbox" name="att_A_14" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
-        <tr><td>If someone I’ve been dating for several months tells me s/he wants to stop seeing me, I’d feel hurt at first, but I’d get over it.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_13" value="1" /></td><td class="att-check"></td></tr>
-        <tr><td>Sometimes when I get what I want in a relationship, I’m not sure what I want anymore.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_14" value="1" /></td></tr>
-        <tr><td>I won’t have much of a problem staying in touch with my ex (strictly platonic) — after all, we have a lot in common.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_14" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>If I notice that someone I'm interested in is checking out other people, I don't let it faze me. I might feel a pang of jealousy, but it's fleeting.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_11" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>If I notice that someone I'm interested in is checking out other people, I feel relieved — it means s/he's not looking to make things exclusive.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_12" value="1" /></td></tr>
+        <tr><td>If I notice that someone I'm interested in is checking out other people, it makes me feel depressed.</td><td class="att-check"><input type="checkbox" name="att_A_12" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>If someone I've been dating begins to act cold and distant, I may wonder what's happened, but I'll know it's probably not about me.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_12" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>If someone I've been dating begins to act cold and distant, I'll probably be indifferent; I might even be relieved.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_13" value="1" /></td></tr>
+        <tr><td>If someone I've been dating begins to act cold and distant, I'll worry that I've done something wrong.</td><td class="att-check"><input type="checkbox" name="att_A_13" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>If my partner was to break up with me, I'd try my best to show her/him what s/he is missing (a little jealousy can't hurt).</td><td class="att-check"><input type="checkbox" name="att_A_14" value="1" /></td><td class="att-check"></td><td class="att-check"></td></tr>
+        <tr><td>If someone I've been dating for several months tells me s/he wants to stop seeing me, I'd feel hurt at first, but I'd get over it.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_13" value="1" /></td><td class="att-check"></td></tr>
+        <tr><td>Sometimes when I get what I want in a relationship, I'm not sure what I want anymore.</td><td class="att-check"></td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_C_14" value="1" /></td></tr>
+        <tr><td>I won't have much of a problem staying in touch with my ex (strictly platonic) — after all, we have a lot in common.</td><td class="att-check"></td><td class="att-check"><input type="checkbox" name="att_B_14" value="1" /></td><td class="att-check"></td></tr>
       </tbody>
     </table>
 
     <div class="att-scores">
-      <div class="att-sc"><div class="sc-num" id="att-a-count">0</div><div class="sc-lbl">A — Anxious<br>/ 14</div></div>
-      <div class="att-sc"><div class="sc-num" id="att-b-count">0</div><div class="sc-lbl">B — Secure<br>/ 14</div></div>
-      <div class="att-sc"><div class="sc-num" id="att-c-count">0</div><div class="sc-lbl">C — Avoidant<br>/ 14</div></div>
+      <div class="att-sc"><div class="sc-num" id="att-a-count">0</div><div class="sc-lbl">A — Anxious<br>/ 14</div></div>
+      <div class="att-sc"><div class="sc-num" id="att-b-count">0</div><div class="sc-lbl">B — Secure<br>/ 14</div></div>
+      <div class="att-sc"><div class="sc-num" id="att-c-count">0</div><div class="sc-lbl">C — Avoidant<br>/ 14</div></div>
     </div>
     <div class="att-dominant">Your attachment style: <span id="att-style-label">—</span></div>
 
@@ -653,13 +880,15 @@
     <input type="hidden" id="h_attachment" name="Attachment_Style" value="" />
 
     <div class="field" style="margin-top:20px;">
-      <label>Anything else about how you show up in relationships — with your partner, kids, or team? <span class="hint">Any patterns you’ve noticed about yourself</span></label>
-      <textarea name="Relationship_Patterns_Notes" rows="3" pl!ceholder="e.g. I tend to people-please at home, I get controlling when I’m stressed, I struggle to switch off from work mode..."></textarea>
+      <label>Anything else about how you show up in relationships — with your partner, kids, or team? <span class="hint">Any patterns you've noticed about yourself</span></label>
+      <textarea name="Relationship_Patterns_Notes" rows="3" placeholder="e.g. I tend to people-please at home, I get controlling when I'm stressed, I struggle to switch off from work mode..."></textarea>
     </div>
   </div>
-</div><!-- ===== SECTION 7: BRAVERMAN NATURE ===== -->
+</div>
+
+<!-- ===== SECTION 11: BRAVERMAN NATURE ===== -->
 <div class="section">
-  <div class="section-header"><div class="num">7</div><h2>Braverman Assessment — Part 1: Nature</h2></div>
+  <div class="section-header"><div class="num">11</div><h2>Braverman Assessment — Part 1: Nature</h2></div>
   <div class="section-body">
     <div class="braverman-instructions">
       <strong>Instructions:</strong> Score each statement honestly based on how you generally are — not how you'd like to be.
@@ -682,7 +911,7 @@
     <div class="score-display">
       <h3>Your Nature Scores (live)</h3>
       <div class="score-grid">
-        <div class="score-item"><div class="label">Do0amine</div><div class="value" id="dom-n-score">0</div><div class="interp" id="dom-n-interp">—</div></div>
+        <div class="score-item"><div class="label">Dopamine</div><div class="value" id="dom-n-score">0</div><div class="interp" id="dom-n-interp">—</div></div>
         <div class="score-item"><div class="label">Acetylcholine</div><div class="value" id="ach-n-score">0</div><div class="interp" id="ach-n-interp">—</div></div>
         <div class="score-item"><div class="label">GABA</div><div class="value" id="gaba-n-score">0</div><div class="interp" id="gaba-n-interp">—</div></div>
         <div class="score-item"><div class="label">Serotonin</div><div class="value" id="sero-n-score">0</div><div class="interp" id="sero-n-interp">—</div></div>
@@ -692,9 +921,9 @@
   </div>
 </div>
 
-<!-- ===== SECTION 8: BRAVERMAN DEFICIENCY ===== -->
+<!-- ===== SECTION 12: BRAVERMAN DEFICIENCY ===== -->
 <div class="section">
-  <div class="section-header"><div class="num">8</div><h2>Braverman Assessment — Part 2: Deficiency</h2></div>
+  <div class="section-header"><div class="num">12</div><h2>Braverman Assessment — Part 2: Deficiency</h2></div>
   <div class="section-body">
     <div class="braverman-instructions">
       Rate how often you experience each symptom or feeling.
@@ -729,7 +958,7 @@
 
 <!-- ===== SUBMIT ===== -->
 <div class="submit-section">
-  <p>Once submitted, your coach will have everything they need before your first session.<br>Your Braverman results and profile will be stored securely in your client file.</p>
+  <p>Once submitted, your coach will have everything they need before your first session.<br>Your profile will be stored securely in your client file.</p>
   <button type="submit">Submit My Onboarding</button>
 </div>
 
@@ -742,6 +971,33 @@
 </div>
 
 <script>
+// ============================================================
+// STAR RATING INIT
+// ============================================================
+function initStarRatings() {
+  const configs = [
+    { rowId: 'stress-stars',     inputId: 'Stress_Level_val',     displayId: 'stress-stars-display',     max: 5  },
+    { rowId: 'commitment-stars', inputId: 'Commitment_Level_val', displayId: 'commitment-stars-display', max: 10 },
+    { rowId: 'purpose-stars',    inputId: 'Purpose_Clarity_val',  displayId: 'purpose-stars-display',    max: 10 }
+  ];
+  configs.forEach(cfg => {
+    const row = document.getElementById(cfg.rowId);
+    if (!row) return;
+    const stars = row.querySelectorAll('.star');
+    const input = document.getElementById(cfg.inputId);
+    const display = document.getElementById(cfg.displayId);
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const val = parseInt(star.dataset.val);
+        stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.val) <= val));
+        if (input) input.value = val;
+        if (display) display.textContent = val + ' / ' + cfg.max;
+      });
+    });
+  });
+}
+initStarRatings();
+
 // ============================================================
 // BRAVERMAN QUESTIONS DATA
 // ============================================================
@@ -868,9 +1124,9 @@ const DEFICIENCY_QUESTIONS = {
 };
 
 // ============================================================
-// BUILD QUESTION HTML
+// BUILD BRAVERMAN QUESTION HTML
 // ============================================================
-function buildQuestions(containerId, questions, prefix, groupName) {
+function buildQuestions(containerId, questions, prefix) {
   const container = document.getElementById(containerId);
   questions.forEach((q, i) => {
     const n = i + 1;
@@ -887,17 +1143,17 @@ function buildQuestions(containerId, questions, prefix, groupName) {
   });
 }
 
-buildQuestions('dom-nature-questions',  NATURE_QUESTIONS.dopamine,     'DN', 'dopamine-nature');
-buildQuestions('ach-nature-questions',  NATURE_QUESTIONS.acetylcholine, 'AN', 'ach-nature');
-buildQuestions('gaba-nature-questions', NATURE_QUESTIONS.gaba,          'GN', 'gaba-nature');
-buildQuestions('sero-nature-questions', NATURE_QUESTIONS.serotonin,     'SN', 'sero-nature');
-buildQuestions('dom-def-questions',     DEFICIENCY_QUESTIONS.dopamine,     'DD', 'dom-def');
-buildQuestions('ach-def-questions',     DEFICIENCY_QUESTIONS.acetylcholine, 'AD', 'ach-def');
-buildQuestions('gaba-def-questions',    DEFICIENCY_QUESTIONS.gaba,          'GD', 'gaba-def');
-buildQuestions('sero-def-questions',    DEFICIENCY_QUESTIONS.serotonin,     'SD', 'sero-def');
+buildQuestions('dom-nature-questions',  NATURE_QUESTIONS.dopamine,     'DN');
+buildQuestions('ach-nature-questions',  NATURE_QUESTIONS.acetylcholine, 'AN');
+buildQuestions('gaba-nature-questions', NATURE_QUESTIONS.gaba,          'GN');
+buildQuestions('sero-nature-questions', NATURE_QUESTIONS.serotonin,     'SN');
+buildQuestions('dom-def-questions',     DEFICIENCY_QUESTIONS.dopamine,     'DD');
+buildQuestions('ach-def-questions',     DEFICIENCY_QUESTIONS.acetylcholine, 'AD');
+buildQuestions('gaba-def-questions',    DEFICIENCY_QUESTIONS.gaba,          'GD');
+buildQuestions('sero-def-questions',    DEFICIENCY_QUESTIONS.serotonin,     'SD');
 
 // ============================================================
-// LIVE SCORING
+// LIVE BRAVERMAN SCORING
 // ============================================================
 function getScore(prefix, count) {
   let total = 0;
@@ -942,7 +1198,6 @@ function updateScores() {
   const dominant = Object.entries(natureMap).sort((a,b) => b[1]-a[1])[0][0];
   document.getElementById('dominant-nt').textContent = dominant;
 
-  // Store in hidden fields
   document.getElementById('h_dom_nature').value  = dn;
   document.getElementById('h_ach_nature').value  = an;
   document.getElementById('h_gaba_nature').value = gn;
@@ -955,28 +1210,20 @@ function updateScores() {
 }
 
 // ============================================================
-// ATTACHMENT STYLE SCORING (Attached by Levine & Heller)
-// A = Anxious (14 items), B = Secure (14 items), C = Avoidant (14 items)
+// ATTACHMENT STYLE SCORING
 // ============================================================
 function calcAttachmentStyle() {
   const aCount = document.querySelectorAll('input[name^="att_A_"]:checked').length;
   const bCount = document.querySelectorAll('input[name^="att_B_"]:checked').length;
   const cCount = document.querySelectorAll('input[name^="att_C_"]:checked').length;
 
-  const aEl = document.getElementById('att-a-count');
-  const bEl = document.getElementById('att-b-count');
-  const cEl = document.getElementById('att-c-count');
-  const styleEl = document.getElementById('att-style-label');
-  if (aEl) aEl.textContent = aCount;
-  if (bEl) bEl.textContent = bCount;
-  if (cEl) cEl.textContent = cCount;
+  document.getElementById('att-a-count').textContent = aCount;
+  document.getElementById('att-b-count').textContent = bCount;
+  document.getElementById('att-c-count').textContent = cCount;
 
-  const hA = document.getElementById('h_att_a');
-  const hB = document.getElementById('h_att_b');
-  const hC = document.getElementById('h_att_c');
-  if (hA) hA.value = aCount;
-  if (hB) hB.value = bCount;
-  if (hC) hC.value = cCount;
+  document.getElementById('h_att_a').value = aCount;
+  document.getElementById('h_att_b').value = bCount;
+  document.getElementById('h_att_c').value = cCount;
 
   const max = Math.max(aCount, bCount, cCount);
   let style;
@@ -992,11 +1239,10 @@ function calcAttachmentStyle() {
     style = 'Secure — comfortable with both intimacy and independence';
   }
 
-  if (styleEl) styleEl.textContent = style;
+  document.getElementById('att-style-label').textContent = style;
   return style + ' (A:' + aCount + ' B:' + bCount + ' C:' + cCount + ')';
 }
 
-// Attach listeners to radio and attachment checkbox inputs
 document.addEventListener('change', (e) => {
   if (e.target.type === 'radio') updateScores();
   if (e.target.type === 'checkbox' && e.target.name && e.target.name.startsWith('att_')) calcAttachmentStyle();
@@ -1008,38 +1254,34 @@ document.addEventListener('change', (e) => {
 document.getElementById('onboarding-form').addEventListener('submit', async function(e) {
   e.preventDefault();
 
-  // Final score capture
   updateScores();
   document.getElementById('h_attachment').value = calcAttachmentStyle();
 
   const form = e.target;
   const formData = new FormData(form);
-
-  // Submit via FormSubmit.co
-  // IMPORTANT: Replace JOSH_EMAIL below with josh@uncmp.com on first activation
   const SUBMIT_URL = 'https://formsubmit.co/josh@uncmp.com';
 
   try {
-    const response = await fetch(SUBMIT_URL, {
-      method: 'POST',
-      body: formData
-    });
+    const response = await fetch(SUBMIT_URL, { method: 'POST', body: formData });
 
     if (response.ok || response.redirected) {
       form.style.display = 'none';
       document.getElementById('success-msg').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // ── ClickUp: Create Client Folder + Doc ───────────────────────
+      // ── ClickUp: Create Client Folder + Doc ────────────────────────
       (async function() {
         try {
-          const CU_TOKEN      = 'pk_48610946_SK2H0FUX6BPXCAWS6G45E6OYCL8OZ9NV';
-          const SPACE_ID      = '90030484038'; // 🚚 Delivery space
-          const WORKSPACE_ID  = '9003199343';
-          const CU_HEADERS    = { 'Authorization': CU_TOKEN, 'Content-Type': 'application/json' };
+          const CU_TOKEN     = 'pk_48610946_SK2H0FUX6BPXCAWS6G45E6OYCL8OZ9NV';
+          const SPACE_ID     = '90030484038';
+          const WORKSPACE_ID = '9003199343';
+          const CU_HEADERS   = { 'Authorization': CU_TOKEN, 'Content-Type': 'application/json' };
+          const WORKER_URL   = 'https://ucmp-clickup-proxy.josh-501.workers.dev';
 
-          // ── Collect all form fields directly from DOM ──
           const gv = name => { const el = document.querySelector(`[name="${name}"]`); return el ? el.value.trim() : ''; };
+          const gr = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : ''; };
+
+          // Personal
           const firstName   = gv('First_Name');
           const lastName    = gv('Last_Name');
           const email       = gv('Email');
@@ -1050,21 +1292,37 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
           const partner     = gv('Partner_Name');
           const yearsTog    = gv('Years_Together');
           const children    = gv('Children');
-          const bizName     = gv('Business_Name');
-          const role        = gv('Role');
-          const industry    = gv('Industry');
-          const yearsInBiz  = gv('Years_In_Business');
-          const revenue     = gv('Annual_Revenue');
-          const teamSize    = gv('Team_Size');
-          const bizDesc     = gv('Business_Description');
-          const weight      = gv('Weight_kg');
-          const height      = gv('Height_cm');
-          const healthRating= gv('Health_Rating');
-          const healthConds = gv('Health_Conditions');
-          const sleep       = gv('Sleep');
-          const exercise    = gv('Exercise');
-          const diet        = gv('Diet');
-          const alcohol     = gv('Alcohol');
+
+          // Business
+          const bizName         = gv('Business_Name');
+          const role            = gv('Role');
+          const industry        = gv('Industry');
+          const yearsInBiz      = gv('Years_In_Business');
+          const revenue         = gv('Annual_Revenue');
+          const teamSize        = gv('Team_Size');
+          const bizDesc         = gv('Business_Description');
+          const incomePersonal  = gv('Income_Personal');
+          const incomeBiz       = gv('Income_Business_Current');
+          const incomeTarget    = gv('Income_Target');
+          const incomeTargetBiz = gv('Income_Business_Target');
+
+          // Health
+          const weight         = gv('Weight_kg');
+          const height         = gv('Height_cm');
+          const sleepHours     = gv('Sleep_Hours');
+          const healthRating   = gv('Health_Rating');
+          const stressLevel    = gv('Stress_Level');
+          const sleepQuality   = gv('Sleep_Quality');
+          const exerciseYN     = gr('Exercise_Consistent');
+          const exerciseDetails= gv('Exercise_Details');
+          const exerciseIntensity = gr('Exercise_Intensity');
+          const biomarkerYN    = gr('Biomarker_Device');
+          const biomarkerName  = gv('Biomarker_Device_Name');
+          const diet           = gv('Diet');
+          const alcohol        = gv('Alcohol');
+          const healthConds    = gv('Health_Conditions');
+
+          // Wheel of Life
           const wolHealth   = gv('WOL_Health');
           const wolRomantic = gv('WOL_Romantic');
           const wolFamily   = gv('WOL_Family');
@@ -1073,58 +1331,89 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
           const wolFinances = gv('WOL_Finances');
           const wolRec      = gv('WOL_Recreation');
           const wolGrowth   = gv('WOL_Growth');
-          const whyNow      = gv('Why_Now');
-          const top3Goals   = gv('Top_3_Goals');
-          const bigChallenge= gv('Biggest_Challenge');
-          const alreadyTried= gv('Already_Tried');
-          const vision12    = gv('Vision_12_Months');
-          const recentWin   = gv('Recent_Win');
-          const successDef  = gv('Success_Definition');
-          const anythingElse= gv('Anything_Else');
-          const relNotes    = gv('Relationship_Patterns_Notes');
-          const domNT       = gv('Dominant_Neurotransmitter');
-          const attachment  = gv('Attachment_Style');
-          const dopNature   = gv('Dopamine_Nature_Score')          || '0';
-          const achNature   = gv('Acetylcholine_Nature_Score')     || '0';
-          const gabaNature  = gv('GABA_Nature_Score')              || '0';
-          const serNature   = gv('Serotonin_Nature_Score')         || '0';
-          const dopDef      = gv('Dopamine_Deficiency_Score')      || '0';
-          const achDef      = gv('Acetylcholine_Deficiency_Score') || '0';
-          const gabaDef     = gv('GABA_Deficiency_Score')          || '0';
-          const serDef      = gv('Serotonin_Deficiency_Score')     || '0';
 
-          // ── Braverman interpretations ──
+          // Intimacy & Relationships
+          const intimateRelDesc  = gv('Intimate_Relationship_Desc');
+          const intimacyChallenges = gv('Intimacy_Challenges');
+          const respectedDesired = gr('Respected_Desired');
+          const respectedWhy     = gv('Respected_Why');
+
+          // Coaching Goals
+          const coachingWant     = gv('Coaching_Want_Most');
+          const vision6          = gv('Vision_6_Months');
+          const vision12         = gv('Vision_12_Months');
+          const breakthrough     = gv('Breakthrough_Result');
+          const biggestObstacles = gv('Biggest_Obstacles');
+
+          // Psychology & Identity
+          const patternsBreak  = gv('Patterns_To_Break');
+          const triggers       = gv('Emotional_Triggers');
+          const whyNowCommit   = gv('Why_Now_Commit');
+          const commitmentLevel= gv('Commitment_Level');
+          const accountability = gv('Accountability');
+          const selfRespect    = gv('Self_Respect');
+          const fatherModel    = gv('Father_Model');
+          const identityCond   = gv('Identity_Conditioning');
+
+          // Deep Reflection
+          const harshSelfTalk       = gv('Harsh_Self_Talk');
+          const ashamedOf           = gv('Ashamed_Of');
+          const purposeClarity      = gv('Purpose_Clarity');
+          const feltAlive           = gv('When_Felt_Alive');
+          const unexpressedEmotions = gv('Unexpressed_Emotions');
+          const realReason          = gv('Real_Reason_Here');
+          const afraidOf            = gv('Afraid_Of_Coaching');
+
+          // Additional context
+          const top3Goals    = gv('Top_3_Goals');
+          const bigChallenge = gv('Biggest_Challenge');
+          const alreadyTried = gv('Already_Tried');
+          const recentWin    = gv('Recent_Win');
+          const successDef   = gv('Success_Definition');
+          const anythingElse = gv('Anything_Else');
+          const relNotes     = gv('Relationship_Patterns_Notes');
+
+          // Braverman scores
+          const domNT     = gv('Dominant_Neurotransmitter');
+          const attachment= gv('Attachment_Style');
+          const dopNature = gv('Dopamine_Nature_Score')          || '0';
+          const achNature = gv('Acetylcholine_Nature_Score')     || '0';
+          const gabaNature= gv('GABA_Nature_Score')              || '0';
+          const serNature = gv('Serotonin_Nature_Score')         || '0';
+          const dopDef    = gv('Dopamine_Deficiency_Score')      || '0';
+          const achDef    = gv('Acetylcholine_Deficiency_Score') || '0';
+          const gabaDef   = gv('GABA_Deficiency_Score')          || '0';
+          const serDef    = gv('Serotonin_Deficiency_Score')     || '0';
+
+          // Interpretations
           const ntDescriptions = {
-            'Dopamine': 'Driven, competitive, direct, and action-oriented. Natural leader who thrives on challenge and results. Wired for achievement and pushing limits. Shadow side: impatience, aggression, and burnout from always needing to win.',
+            'Dopamine':      'Driven, competitive, direct, and action-oriented. Natural leader who thrives on challenge and results. Wired for achievement and pushing limits. Shadow side: impatience, aggression, and burnout from always needing to win.',
             'Acetylcholine': 'Creative, curious, and highly intuitive. Rapid learner with a rich inner world and a talent for seeing the big picture. Loves ideas and connection. Shadow side: can be scattered, overthinks, and struggles to execute without structure.',
-            'GABA': 'Calm, reliable, and structured. The steady anchor — practical, loyal, and deeply dependable. Thrives in routine and long-term relationships. Shadow side: resistant to change, can suppress emotion, and may avoid necessary confrontation.',
-            'Serotonin': 'Reflective, content, and meaning-driven. Operates from a deep sense of purpose and inner peace. Emotionally grounded. Shadow side: can be passive, withdrawn, and overly sensitive to environment and mood shifts.'
+            'GABA':          'Calm, reliable, and structured. The steady anchor — practical, loyal, and deeply dependable. Thrives in routine and long-term relationships. Shadow side: resistant to change, can suppress emotion, and may avoid necessary confrontation.',
+            'Serotonin':     'Reflective, content, and meaning-driven. Operates from a deep sense of purpose and inner peace. Emotionally grounded. Shadow side: can be passive, withdrawn, and overly sensitive to environment and mood shifts.'
           };
           const domNTDesc = ntDescriptions[domNT] || 'Profile not yet determined.';
-
           const defLabel = score => { const n = parseInt(score); return n <= 5 ? 'Low' : n <= 13 ? 'Moderate' : 'High'; };
           const defDesc = (nt, score) => {
             const level = defLabel(score);
             const descs = {
-              'Dopamine':      { Low: 'No significant deficiency. Energy, drive, and motivation are operating well.', Moderate: 'Some depletion in drive and motivation. May experience occasional fatigue, reduced motivation, or reliance on stimulants.', High: 'Significant dopamine deficiency. Likely experiencing low energy, apathy, difficulty starting tasks, brain fog, or low libido. This is a priority focus area.' },
+              'Dopamine':      { Low: 'No significant deficiency. Energy, drive, and motivation are operating well.', Moderate: 'Some depletion in drive and motivation. May experience occasional fatigue, reduced motivation, or reliance on stimulants.', High: 'Significant dopamine deficiency. Likely experiencing low energy, apathy, difficulty starting tasks, brain fog, or low libido. Priority focus area.' },
               'Acetylcholine': { Low: 'Memory, focus, and creativity are functioning well.', Moderate: 'Some cognitive slowdown. May notice word recall issues, reduced creativity, or difficulty absorbing new information.', High: 'Significant acetylcholine deficiency. Likely experiencing notable memory issues, mental fog, slow thinking, and difficulty concentrating. Priority focus area.' },
               'GABA':          { Low: 'Nervous system is well-regulated. Calm under pressure.', Moderate: 'Some stress and anxiety present. May struggle to fully relax or experience mild tension, sleep disturbance, or irritability.', High: 'Significant GABA deficiency. Likely experiencing chronic anxiety, racing thoughts, difficulty sleeping, physical tension, and overwhelm. Priority focus area.' },
               'Serotonin':     { Low: 'Mood, sleep, and contentment are tracking well.', Moderate: 'Some mood variability. May experience periods of flatness, mild pessimism, or sensitivity to criticism.', High: 'Significant serotonin deficiency. Likely experiencing persistent low mood, poor sleep quality, low self-esteem, carb cravings, and social withdrawal. Priority focus area.' }
             };
             return (descs[nt] && descs[nt][level]) || '';
           };
-
-          // ── Attachment style explanations ──
           const attachmentDescs = {
-            'Anxious / Preoccupied — craves closeness, fears abandonment': 'Anxious attachment style. Tends to crave closeness and reassurance, while fearing abandonment or rejection. Highly sensitive to a partner\'s moods and actions. Often over-analyses relationship signals and can become preoccupied with whether they are loved. In coaching: this pattern often shows up as people-pleasing, emotional reactivity, difficulty setting boundaries, and a tendency to seek external validation. The work is building secure internal self-worth that does not depend on others\' responses.',
-            'Avoidant / Dismissive — values independence, uncomfortable with closeness': 'Avoidant attachment style. Values independence and self-sufficiency above intimacy. Tends to minimise emotional needs — both their own and others\'. Can feel suffocated by closeness and withdraw when partners seek connection. In coaching: often presents as emotional unavailability, difficulty asking for help, dismissiveness of vulnerability, and over-investment in work or achievement as a substitute for intimacy. The work is learning that dependence and closeness are safe.',
-            'Secure — comfortable with both intimacy and independence': 'Secure attachment style. Comfortable with both intimacy and independence. Can give and receive love without significant anxiety or avoidance. Handles conflict constructively and trusts that relationships can survive difficulty. In coaching: a solid foundation to build on — work can go straight to goals, performance, and growth without needing to first untangle deep relational patterns.',
-            'Fearful-Avoidant — high anxiety and avoidance; wants closeness but fears it': 'Fearful-avoidant (disorganised) attachment style. Simultaneously craves and fears closeness — wanting deep connection but expecting it to bring pain. Often experienced early relational trauma. Relationships can feel chaotic or push-pull. In coaching: requires patience and consistency. The work involves building safety and trust in the coaching relationship itself, as well as untangling the internal conflict between wanting connection and protecting against perceived threat.'
+            'Anxious / Preoccupied — craves closeness, fears abandonment': 'Anxious attachment style. Tends to crave closeness and reassurance, while fearing abandonment or rejection. Highly sensitive to a partner\'s moods and actions. Often over-analyses relationship signals. In coaching: this pattern often shows up as people-pleasing, emotional reactivity, difficulty setting boundaries, and seeking external validation. The work is building secure internal self-worth.',
+            'Avoidant / Dismissive — values independence, uncomfortable with closeness': 'Avoidant attachment style. Values independence and self-sufficiency above intimacy. Tends to minimise emotional needs — both their own and others\'. Can feel suffocated by closeness. In coaching: often presents as emotional unavailability, difficulty asking for help, and over-investment in work or achievement as a substitute for intimacy. The work is learning that dependence and closeness are safe.',
+            'Secure — comfortable with both intimacy and independence': 'Secure attachment style. Comfortable with both intimacy and independence. Can give and receive love without significant anxiety or avoidance. Handles conflict constructively. In coaching: a solid foundation — work can go straight to goals, performance, and growth.',
+            'Fearful-Avoidant — high anxiety and avoidance; wants closeness but fears it': 'Fearful-avoidant (disorganised) attachment style. Simultaneously craves and fears closeness. Often experienced early relational trauma. Relationships can feel chaotic or push-pull. In coaching: requires patience and consistency. The work involves building safety and trust, and untangling the internal conflict between wanting connection and protecting against perceived threat.'
           };
           const attachStyleKey = Object.keys(attachmentDescs).find(k => attachment.startsWith(k.split(' —')[0])) || attachment;
           const attachDesc = attachmentDescs[attachStyleKey] || `Attachment style recorded as: ${attachment}`;
 
-          // ── 1. Create client folder in Delivery space ──
+          // ── 1. Create client folder ──
           const folderRes = await fetch(
             `https://api.clickup.com/api/v2/space/${SPACE_ID}/folder`,
             { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({ name: `${firstName} ${lastName}` }) }
@@ -1133,14 +1422,12 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
           const folderId = folderData.id;
           if (!folderId) throw new Error('Folder creation failed');
 
-          // ── 2. Create Actions & Tasks list (matching template) ──
+          // ── 2. Create Actions & Tasks list ──
           fetch(`https://api.clickup.com/api/v2/folder/${folderId}/list`,
             { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({ name: '✅ Actions & Tasks' }) }
           );
 
-          // ── 3. Create "📋 Onboarding Profile" doc via Cloudflare Worker proxy ──
-          // (ClickUp v3 docs AND pages APIs are both CORS-blocked from browser; Worker proxies server-side)
-          const WORKER_URL = 'https://ucmp-clickup-proxy.josh-501.workers.dev';
+          // ── 3. Create doc via Worker ──
           const docRes = await fetch(WORKER_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -1154,7 +1441,7 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
           const docData = await docRes.json();
           const docId = docData.id;
 
-          // ── 4. Build full onboarding content and POST page via Cloudflare Worker proxy ──
+          // ── 4. Build full page content ──
           const pageContent =
 `# ${firstName} ${lastName} — Onboarding Profile
 
@@ -1186,6 +1473,12 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
 **Business Description:**
 ${bizDesc}
 
+## 💰 Income & Financial Goals
+| | Current | Target |
+|--|---------|--------|
+| **Personal Income** | ${incomePersonal} | ${incomeTarget} |
+| **Business Revenue** | ${incomeBiz} | ${incomeTargetBiz} |
+
 ---
 
 ## 🏋️ Health & Lifestyle
@@ -1193,12 +1486,21 @@ ${bizDesc}
 |-------|-------|
 | **Weight** | ${weight} kg |
 | **Height** | ${height} cm |
+| **Sleep Hours (avg)** | ${sleepHours} |
 | **Overall Health Rating** | ${healthRating} / 10 |
-| **Sleep** | ${sleep} |
-| **Exercise** | ${exercise} |
+| **Stress Level** | ${stressLevel} / 5 |
+| **Exercises Consistently** | ${exerciseYN} |
+| **Exercise Intensity** | ${exerciseIntensity} |
+| **Biomarker Device** | ${biomarkerYN}${biomarkerName ? ' — ' + biomarkerName : ''} |
 | **Diet** | ${diet} |
 | **Alcohol / Substances** | ${alcohol} |
 | **Health Conditions / Medications** | ${healthConds || 'None noted'} |
+
+**Sleep Quality:**
+${sleepQuality}
+
+**Exercise Details:**
+${exerciseDetails}
 
 ---
 
@@ -1213,6 +1515,91 @@ ${bizDesc}
 | Finances | ${wolFinances} |
 | Recreation & Adventure | ${wolRec} |
 | Personal Growth & Spirituality | ${wolGrowth} |
+
+---
+
+## 💑 Intimacy & Relationships
+
+**How would you describe your current intimate relationship(s)?**
+${intimateRelDesc}
+
+**Biggest challenges in intimacy and connection:**
+${intimacyChallenges}
+
+**Do you feel respected and desired in your relationship?** ${respectedDesired}
+
+**Why, or why not?**
+${respectedWhy}
+
+---
+
+## 🎯 Coaching Goals & Vision
+
+**What do you want most from this coaching container?**
+${coachingWant}
+
+**6-Month Vision (if things go right):**
+${vision6}
+
+**12-Month Vision (if things go right):**
+${vision12}
+
+**What would you consider a breakthrough result?**
+${breakthrough}
+
+**Biggest obstacles that have kept you from the results you want:**
+${biggestObstacles}
+
+---
+
+## 🧩 Psychology & Identity
+
+**Patterns or habits to break:**
+${patternsBreak}
+
+**Emotional triggers:**
+${triggers}
+
+**Why NOW is the time for this change:**
+${whyNowCommit}
+
+**Commitment Level:** ${commitmentLevel} / 10
+
+**What would stop you — and how to hold accountable:**
+${accountability}
+
+**How much do you respect the man you currently are?**
+${selfRespect}
+
+**What your father modelled about being a man:**
+${fatherModel}
+
+**The man you were told you were supposed to be:**
+${identityCond}
+
+---
+
+## 🔮 Deep Reflection
+
+**The harshest thing you regularly say to yourself:**
+${harshSelfTalk}
+
+**What you are most ashamed of:**
+${ashamedOf}
+
+**Sense of purpose beyond your roles:** ${purposeClarity} / 10
+
+**When you last felt genuinely alive:**
+${feltAlive}
+
+**Emotions you've never allowed yourself to fully feel:**
+${unexpressedEmotions}
+
+**The real reason you're here right now:**
+${realReason}
+
+**What you are most afraid this coaching will ask of you:**
+${afraidOf}
 
 ---
 
@@ -1266,10 +1653,7 @@ ${relNotes ? '**Client notes on relationship patterns:**\n' + relNotes : ''}
 
 ---
 
-## 📋 Coaching Intake
-
-**Why Now — What made you say yes?**
-${whyNow}
+## 📋 Additional Context
 
 **Top 3 Goals**
 ${top3Goals}
@@ -1279,9 +1663,6 @@ ${bigChallenge}
 
 **What Have You Already Tried?**
 ${alreadyTried}
-
-**12-Month Vision**
-${vision12}
 
 **Recent Win**
 ${recentWin}
@@ -1295,7 +1676,6 @@ ${anythingElse}
 ---
 *Submitted via UCMP Onboarding Form*`;
 
-          // Post page content to the doc via Cloudflare Worker
           if (docId) {
             await fetch(WORKER_URL, {
               method: 'POST',
@@ -1320,9 +1700,8 @@ ${anythingElse}
       alert('Something went wrong. Please try again or contact your coach directly.');
     }
   } catch (err) {
-    // Fallback: open mailto with summary
     const name = formData.get('First_Name') + ' ' + formData.get('Last_Name');
-    const mailto = `mailto:josh@uncmp.com?subject=UCMP Onboarding — ${name}&body=Form submission from ${name} (${formData.get('Email')})%0A%0ABraverman Scores:%0ADopamine Nature: ${formData.get('Dopamine_Nature_Score')}%0AAcetylcholine Nature: ${formData.get('Acetylcholine_Nature_Score')}%0AGABA Nature: ${formData.get('GABA_Nature_Score')}%0ASerotonin Nature: ${formData.get('Serotonin_Nature_Score')}%0A%0ADopamine Deficiency: ${formData.get('Dopamine_Deficiency_Score')}%0AAcetylcholine Deficiency: ${formData.get('Acetylcholine_Deficiency_Score')}%0AGABA Deficiency: ${formData.get('GABA_Deficiency_Score')}%0ASerotonin Deficiency: ${formData.get('Serotonin_Deficiency_Score')}%0A%0ADominant: ${formData.get('Dominant_Neurotransmitter')}%0AAttachment: ${formData.get('Attachment_Style')}`;
+    const mailto = `mailto:josh@uncmp.com?subject=UCMP Onboarding — ${name}&body=Form submission from ${name} (${formData.get('Email')})`;
     window.location.href = mailto;
   }
 });
