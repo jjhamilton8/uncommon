@@ -1138,29 +1138,23 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
             { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({ name: '✅ Actions & Tasks' }) }
           );
 
-          // ── 3. Create client doc inside the folder (for coaching session notes) ──
-          fetch(
+          // ── 3. Create "📋 Onboarding Profile" doc inside the client folder ──
+          const docRes = await fetch(
             `https://api.clickup.com/api/v3/workspaces/${WORKSPACE_ID}/docs`,
             { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({
-                name: `${firstName} ${lastName} — Coaching Notes`,
+                name: `📋 ${firstName} ${lastName} — Onboarding Profile`,
                 parent: { id: folderId, type: 5 },
                 visibility: 'PUBLIC',
                 create_page: false
               })
             }
           );
+          const docData = await docRes.json();
+          const docId = docData.id;
 
-          // ── 4. Create "📋 Onboarding Profile" task in Actions & Tasks list ──
-          // (ClickUp v3 pages API is CORS-restricted from browser; v2 task description supports full markdown)
-          const listRes = await fetch(
-            `https://api.clickup.com/api/v2/folder/${folderId}/list`,
-            { method: 'GET', headers: CU_HEADERS }
-          );
-          const listData = await listRes.json();
-          const listId = (listData.lists && listData.lists[0]) ? listData.lists[0].id : null;
-          if (!listId) throw new Error('List not found');
-
-          const taskDescription =
+          // ── 4. Build full onboarding content and POST page via Cloudflare Worker proxy ──
+          // (ClickUp v3 pages API is CORS-blocked from browser; Worker proxies server-side)
+          const pageContent =
 `# ${firstName} ${lastName} — Onboarding Profile
 
 ## 👤 Personal Details
@@ -1300,15 +1294,19 @@ ${anythingElse}
 ---
 *Submitted via UCMP Onboarding Form*`;
 
-          await fetch(
-            `https://api.clickup.com/api/v2/list/${listId}/task`,
-            { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({
-                name: '📋 Onboarding Profile',
-                description: taskDescription,
-                status: 'to do'
+          // Post page content to the doc via Cloudflare Worker (bypasses CORS on ClickUp v3 pages API)
+          if (docId) {
+            await fetch('https://ucmp-clickup-proxy.josh-501.workers.dev', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                workspaceId: WORKSPACE_ID,
+                docId: docId,
+                name: `${firstName} ${lastName} — Onboarding Profile`,
+                content: pageContent
               })
-            }
-          );
+            });
+          }
 
         } catch(e) {
           // Silently fail — email via formsubmit.co already captured the data
