@@ -961,7 +961,7 @@ function updateScores() {
 function calcAttachmentStyle() {
   const aCount = document.querySelectorAll('input[name^="att_A_"]:checked').length;
   const bCount = document.querySelectorAll('input[name^="att_B_"]:checked').length;
-  const cCoun4 = document.querySelectorAll('input[name^="att_C_"]:checked').length;
+  const cCount = document.querySelectorAll('input[name^="att_C_"]:checked').length;
 
   const aEl = document.getElementById('att-a-count');
   const bEl = document.getElementById('att-b-count');
@@ -987,7 +987,7 @@ function calcAttachmentStyle() {
   } else if (aCount === max) {
     style = 'Anxious / Preoccupied — craves closeness, fears abandonment';
   } else if (cCount === max) {
-    style = 'Avoidant / Dismissiv% — values independence, uncomfortable with closeness';
+    style = 'Avoidant / Dismissive — values independence, uncomfortable with closeness';
   } else {
     style = 'Secure — comfortable with both intimacy and independence';
   }
