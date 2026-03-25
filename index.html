@@ -1272,10 +1272,8 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
       // ── ClickUp: Create Client Folder + Doc ────────────────────────
       (async function() {
         try {
-          const CU_TOKEN     = 'pk_48610946_SK2H0FUX6BPXCAWS6G45E6OYCL8OZ9NV';
           const SPACE_ID     = '90030484038';
           const WORKSPACE_ID = '9003199343';
-          const CU_HEADERS   = { 'Authorization': CU_TOKEN, 'Content-Type': 'application/json' };
           const WORKER_URL   = 'https://ucmp-clickup-proxy.josh-501.workers.dev';
 
           const gv = name => { const el = document.querySelector(`[name="${name}"]`); return el ? el.value.trim() : ''; };
@@ -1413,19 +1411,20 @@ document.getElementById('onboarding-form').addEventListener('submit', async func
           const attachStyleKey = Object.keys(attachmentDescs).find(k => attachment.startsWith(k.split(' —')[0])) || attachment;
           const attachDesc = attachmentDescs[attachStyleKey] || `Attachment style recorded as: ${attachment}`;
 
-          // ── 1. Create client folder ──
-          const folderRes = await fetch(
-            `https://api.clickup.com/api/v2/space/${SPACE_ID}/folder`,
-            { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({ name: `${firstName} ${lastName}` }) }
-          );
+          // ── 1. Create client folder (via Worker — v2 CORS blocked from browser) ──
+          const folderRes = await fetch(WORKER_URL, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'createFolder', spaceId: SPACE_ID, name: `${firstName} ${lastName}` })
+          });
           const folderData = await folderRes.json();
           const folderId = folderData.id;
-          if (!folderId) throw new Error('Folder creation failed');
+          if (!folderId) throw new Error('Folder creation failed: ' + JSON.stringify(folderData));
 
-          // ── 2. Create Actions & Tasks list ──
-          fetch(`https://api.clickup.com/api/v2/folder/${folderId}/list`,
-            { method: 'POST', headers: CU_HEADERS, body: JSON.stringify({ name: '✅ Actions & Tasks' }) }
-          );
+          // ── 2. Create Actions & Tasks list (via Worker) ──
+          fetch(WORKER_URL, {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'createList', folderId: folderId, name: '✅ Actions & Tasks' })
+          });
 
           // ── 3. Create doc via Worker ──
           const docRes = await fetch(WORKER_URL, {
